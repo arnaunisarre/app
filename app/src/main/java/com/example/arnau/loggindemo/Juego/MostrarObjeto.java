@@ -34,7 +34,7 @@ public class MostrarObjeto extends AppCompatActivity {
 
         Intent i = this.getIntent();
         nombreUsuario = i.getStringExtra("id");
-        nombreObjeto = i.getStringExtra("id");
+        nombreObjeto = i.getStringExtra("objeto");
 
 
 
@@ -53,8 +53,9 @@ public class MostrarObjeto extends AppCompatActivity {
                     description = (TextView)findViewById(R.id.description_text);
                     description.setText(u.getDescripcion());
                     id = (TextView)findViewById(R.id.id_text);
-                    id.setText(u.getIdObjeto());
-                    //Picasso.with(getApplicationContext()).load(u.getUrlObjeto()).into((ImageView) findViewById(R.id.image));
+
+                    id.setText(""+u.getIdObjeto());
+                    Picasso.with(getApplicationContext()).load(R.drawable.agua).into((ImageView) findViewById(R.id.image));
                 }
             }
 

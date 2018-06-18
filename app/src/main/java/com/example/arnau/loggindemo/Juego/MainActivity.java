@@ -71,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 startActivity(intent);
+
+//                Intent intent = new Intent(MainActivity.this, MostrarObjeto.class);
+//
+//                intent.putExtra("id", "admin");
+//                intent.putExtra("objeto", "gafas");
+//                startActivity(intent);
             }
         });{
 
@@ -105,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        com.example.arnau.loggindemo.Clases.Login login2 = new Login(usuario, password);
+        Login login2 = new Login(usuario, password);
+        Log.d("Post", "onResponse. Body: " + login2.getUsername());
 
         callLogin = API.getInstance().api.login(login2);
         callLogin.enqueue( new Callback<Boolean>() {

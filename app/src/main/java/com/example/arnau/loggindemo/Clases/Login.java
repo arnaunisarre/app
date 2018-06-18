@@ -5,34 +5,36 @@ import com.google.gson.annotations.SerializedName;
 
 public class Login {
 
-    @SerializedName("nombre")
+    @SerializedName("username")
     @Expose
-    private String nombre;
-
+    private String username;
 
     @SerializedName("password")
     @Expose
-    private  String password;
+    private String password;
 
-    public Login(){
-
+    public Login() {
     }
 
-    public Login(String nombre, String password){
-        nombre=this.nombre;
-        password=this.password;
-
+    public Login(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    @Override
+    public String toString() {
+        return "{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
-
-    public String getNombre() {
-        return nombre;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsername(String username) {
+        this.username = username;
     }
-
 
     public String getPassword() {
         return password;
@@ -40,14 +42,6 @@ public class Login {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "nombre='" + nombre + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 
 }

@@ -19,7 +19,9 @@
         android:layout_marginTop="8dp"
 
         android:fontFamily="@font/black_ops_one"
+        android:lineSpacingExtra="8sp"
         android:text="Button"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bDerechaAbajo"
         app:layout_constraintHorizontal_bias="0.355"
@@ -35,7 +37,9 @@
         android:layout_marginEnd="104dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/black_ops_one"
+        android:lineSpacingExtra="8sp"
         android:text="Button"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bDerechaArriba"
@@ -49,7 +53,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
         android:fontFamily="@font/black_ops_one"
+        android:lineSpacingExtra="8sp"
         android:text="Button"
+        android:textSize="8sp"
         app:layout_constraintEnd_toStartOf="@+id/bDerechaArriba"
         app:layout_constraintHorizontal_bias="0.354"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +69,7 @@
         android:layout_marginTop="36dp"
         android:fontFamily="@font/black_ops_one"
         android:text="Button"
+        android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textPregunta" />
 

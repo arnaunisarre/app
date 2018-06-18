@@ -8,7 +8,7 @@ public class API {
 
     private static API instance;
 
-    private static final String baseUrl = "http://192.168.42.66:8080/myapp/";
+    private static final String baseUrl = "http://192.168.0.160:8080/myapp/";
     public static TrackAPI api;
 
     private API(){

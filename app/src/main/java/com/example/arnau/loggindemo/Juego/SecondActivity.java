@@ -23,7 +23,7 @@ Usuario jugador;
         switch(requestCode) {
             case (SECOND_ACTIVITY_REQUEST_CODE) : {
                 if (resultCode == Preguntas.RESULT_OK) {
-                    
+
                     jugador = (Usuario)data.getExtras().getSerializable("usuario");
                 }
                 break;
@@ -39,7 +39,7 @@ Usuario jugador;
         //jugador = (Usuario)i.getExtras().getSerializable("usuario");
         Usuario p = new Usuario("arnau","arnau");
         jugador = p;
-        Objeto gafas= new Objeto("gafas",2,"este permite leer mejor","imagen");
+        Objeto gafas= new Objeto(2,2,"gafas","este permite leer mejor","imagen");
         jugador.miInventario.add(gafas);
         setContentView(R.layout.activity_second);
 

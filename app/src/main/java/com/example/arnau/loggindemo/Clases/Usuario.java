@@ -26,6 +26,10 @@ public class Usuario implements Serializable {
     @SerializedName("resistencia")
     @Expose
     private int resistencia;
+
+
+
+    private int id;
     public LinkedList<Objeto> miInventario = new LinkedList<Objeto>();
 
 
@@ -105,6 +109,13 @@ public class Usuario implements Serializable {
 
     public void setResistencia(int resistencia) {
         this.resistencia = resistencia;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setMiInventario(LinkedList<Objeto> miInventario) {

@@ -33,7 +33,7 @@ public class GameView  extends SurfaceView  {
 
     private Bitmap bHierba, bAgua,bHierba2,bHierba3,bMuro1,bSuelo1,bMuro2;
     private Bitmap personaje;
-    private Bitmap malo1;
+    private Bitmap malo1,malo2,malo3,malo4,malo5,malo6,malo7,malo8,malo9,malo10;
     private Bitmap botonDerecha, botonIzquierda, botonArriba, botonAbajo;
     private Bitmap instrucciones;
     //private Escenario esc  = new Escenario("a",22,12);
@@ -98,6 +98,9 @@ public class GameView  extends SurfaceView  {
         botonIzquierda = BitmapFactory.decodeResource(getResources(),R.drawable.flecha_gris_izquierda);
         botonArriba = BitmapFactory.decodeResource(getResources(),R.drawable.flecha_gris_arriba);
         botonAbajo = BitmapFactory.decodeResource(getResources(),R.drawable.flecha_gris_abajo);
+
+
+
         for(int p=0;p<esc.getNumVerticales();p++) {
             esc.celdas[0][p].setTipo("y");
             esc.celdas[0][p].setFalsePuedopasar();
@@ -117,11 +120,39 @@ public class GameView  extends SurfaceView  {
 
         esc.celdas[9][1].setTipo("malo1");
         esc.celdas[9][1].setFalsePuedopasar();
+        esc.celdas[5][2].setTipo("malo2");
+        esc.celdas[5][2].setFalsePuedopasar();
+        esc.celdas[4][5].setTipo("malo3");
+        esc.celdas[4][5].setFalsePuedopasar();
+        esc.celdas[7][10].setTipo("malo4");
+        esc.celdas[7][10].setFalsePuedopasar();
+        esc.celdas[15][4].setTipo("malo5");
+        esc.celdas[15][4].setFalsePuedopasar();
+        esc.celdas[20][1].setTipo("malo6");
+        esc.celdas[20][1].setFalsePuedopasar();
+        esc.celdas[17][9].setTipo("malo7");
+        esc.celdas[17][9].setFalsePuedopasar();
+        esc.celdas[3][7].setTipo("malo8");
+        esc.celdas[3][7].setFalsePuedopasar();
+        esc.celdas[1][6].setTipo("malo9");
+        esc.celdas[1][6].setFalsePuedopasar();
+
 
         personaje = BitmapFactory.decodeResource(getResources(), R.drawable.bad5);
 
         sprite = new Sprite(this,personaje);
         malo1 = BitmapFactory.decodeResource(getResources(), R.drawable.malo1);
+        malo2 = BitmapFactory.decodeResource(getResources(), R.drawable.malo2);
+        malo3 = BitmapFactory.decodeResource(getResources(), R.drawable.malo3);
+        malo4 = BitmapFactory.decodeResource(getResources(), R.drawable.malo4);
+        malo5 = BitmapFactory.decodeResource(getResources(), R.drawable.malo5);
+        malo6 = BitmapFactory.decodeResource(getResources(), R.drawable.malo6);
+        malo7 = BitmapFactory.decodeResource(getResources(), R.drawable.malo7);
+        malo8 = BitmapFactory.decodeResource(getResources(), R.drawable.malo8);
+        malo9 = BitmapFactory.decodeResource(getResources(), R.drawable.malo9);
+        malo10 = BitmapFactory.decodeResource(getResources(), R.drawable.malo10);
+
+
 
 
 
@@ -202,6 +233,54 @@ public class GameView  extends SurfaceView  {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo1, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                }
+                else if (escenario.celdas[j][i].getTipo().equals("malo2")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo2, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                }
+                else if (escenario.celdas[j][i].getTipo().equals("malo3")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo3, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                }
+                else if (escenario.celdas[j][i].getTipo().equals("malo4")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo4, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                }
+                else if (escenario.celdas[j][i].getTipo().equals("malo5")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo5, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                }
+                else if (escenario.celdas[j][i].getTipo().equals("malo6")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo6, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                }
+                else if (escenario.celdas[j][i].getTipo().equals("malo7")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo7, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                }
+                else if (escenario.celdas[j][i].getTipo().equals("malo8")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo8, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                }
+                else if (escenario.celdas[j][i].getTipo().equals("malo9")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo9, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
                 }
                 else if(escenario.celdas[j][i].getTipo().equals("y")){

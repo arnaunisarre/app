@@ -7,11 +7,14 @@ public class Objeto implements Serializable {
 
 
     private int idObjeto;
+    private String urlObjeto;
     private String nombreObjeto;
     private String descripcion;
-    private String urlObjeto;
+    private int idUsuario;
 
+    public int getIdUsuario() { return idUsuario; }
 
+    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
     public int getIdObjeto() {
         return idObjeto;
     }
@@ -57,11 +60,19 @@ public class Objeto implements Serializable {
    public  Objeto(){
 
    }
-    public Objeto(String nombre, int idObjeto, String descripcion, String urlObjeto){
-        this.nombreObjeto = nombre;
+    public Objeto(int idObjeto, int idUsuario, String nombreObjeto, String urlObjeto, String descripcion){
         this.idObjeto = idObjeto;
-        this.descripcion = descripcion;
+        this.idUsuario = idUsuario;
+        this.nombreObjeto = nombreObjeto;
         this.urlObjeto = urlObjeto;
+        this.descripcion = descripcion;
+    }
+    public Objeto(int idUsuario, String nombreObjeto, String urlObjeto, String descripcion){
+
+        this.idUsuario = idUsuario;
+        this.nombreObjeto = nombreObjeto;
+        this.urlObjeto = urlObjeto;
+        this.descripcion = descripcion;
     }
 
 

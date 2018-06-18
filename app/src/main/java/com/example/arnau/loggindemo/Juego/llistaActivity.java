@@ -3,6 +3,7 @@ package com.example.arnau.loggindemo.Juego;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -26,12 +27,18 @@ public class llistaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_llista);
 
         API.getInstance().api.getlistaObjetosUser("admin").enqueue(new Callback<List<Objeto>>() {
+
             @Override
             public void onResponse(Call<List<Objeto>> call, Response<List<Objeto>> response) {
+                Log.d("a","ha entrat");
                 if (response.isSuccessful()){
+                    Log.d("a","hi ha resposta");
                     final List<Objeto>  objectArray = response.body();
                     final ListView lv = (ListView) findViewById(R.id.books_list);
+                    Log.d("a","ha pasat el layout");
                     ObjetoArrayAdapter uaa = new ObjetoArrayAdapter(getApplicationContext(), objectArray);
+                    Log.d("a","ha pasat el array");
+
                     lv.setAdapter(uaa);
                    ProgressBar pb = (ProgressBar)findViewById(R.id.loading);
                     pb.setVisibility(View.INVISIBLE);

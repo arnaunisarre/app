@@ -113,7 +113,8 @@ public class Sprite {
                 posy =  posy-1;
                else {
 
-                   if (esc.celdas[posx][(posy - 1)].getTipo().equals("malo1")) {
+                   if (esc.celdas[posx][(posy - 1)].getTipo().contains("malo")==true) {
+                       //esc.celdas[posx][(posy - 1)].getTipo().equals("malo1")
                        int o = 1;
                        gameView.startActProva(esc.celdas[posx][(posy - 1)].getTipo());
                    }
@@ -127,7 +128,9 @@ public class Sprite {
                 if (valido ==true )
                 posx = posx-1;
                 else{
-                    if (esc.celdas[posx-1][(posy)].getTipo().equals("malo1")) {
+                    if (esc.celdas[posx-1][(posy)].getTipo().contains("malo")==true) {
+                        //esc.celdas[posx-1][(posy)].getTipo().equals("malo1")
+
                         int o = 1;
                         gameView.startActProva((esc.celdas[posx - 1][(posy)].getTipo()));
                 }
@@ -143,7 +146,8 @@ public class Sprite {
                 posy = posy+1;
                 else {
 
-                    if (esc.celdas[posx][(posy + 1)].getTipo().equals("malo1")) {
+                    if (esc.celdas[posx][(posy + 1)].getTipo().contains("malo")==true) {
+                        //esc.celdas[posx][(posy + 1)].getTipo().equals("malo1")
                         int o = 1;
                         gameView.startActProva(esc.celdas[posx][(posy + 1)].getTipo());
                     }
@@ -160,7 +164,8 @@ public class Sprite {
                 }
 
                 else{
-                    if (esc.celdas[posx+1][(posy)].getTipo().equals("malo1")){
+                    if (esc.celdas[posx+1][(posy)].getTipo().contains("malo")==true){
+                        //esc.celdas[posx+1][(posy)].getTipo().equals("malo1")
                         int o =1;
                         gameView.startActProva(esc.celdas[posx+1][(posy)].getTipo());
                     }

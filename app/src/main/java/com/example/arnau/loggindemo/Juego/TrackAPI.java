@@ -17,13 +17,13 @@ public interface TrackAPI {
 
 
 
-    @POST("json/inicio")
-    Call<Boolean> login(@Body Login login);
+    @POST("json/login")
+    Call<Boolean> login (@Body Login login);
 
     @GET("json/listaObjetosUsuario/{nombreusuario}")
     Call <List<Objeto>> getlistaObjetosUser (@Path("nombreusuario") String nombreus);
 
-    @GET ("json//obj/{user}/{obj}")
+    @GET ("json/obj/{user}/{obj}")
     Call<Objeto> getObjeto(@Path("user") String usuario, @Path("obj") String nombreObjeto);
 
 
