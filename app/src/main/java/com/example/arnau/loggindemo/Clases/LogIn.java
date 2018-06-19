@@ -4,7 +4,6 @@ public class LogIn {
     String nombre;
     String password;
 
-
     public LogIn(){}
 
     public LogIn(String nombre, String password){
@@ -28,6 +27,5 @@ public class LogIn {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
 }
