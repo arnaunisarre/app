@@ -7,18 +7,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.arnau.loggindemo.Clases.Login;
+import com.example.arnau.loggindemo.Clases.LogIn;
+
+import com.example.arnau.loggindemo.Clases.Usuario;
 import com.example.arnau.loggindemo.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,14 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
         Name = (EditText)findViewById(R.id.etName);
         Password = (EditText)findViewById(R.id.etPassword);
-        Info = (TextView)findViewById(R.id.tvInfo);
+
         Login = (Button)findViewById(R.id.btnLogin);
 
 
 
 
-
-        Info.setText("No of attempts remaining: 5");
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,19 +62,45 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button salta = (Button) findViewById(R.id.salta);
+        Button salta = (Button) findViewById(R.id.registrarse);
 
         salta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                startActivity(intent);
+                String nombreUsuario = Name.getText().toString();
+                String password  = Password.getText().toString();
+                Usuario pa = new Usuario(nombreUsuario,password);
+                Log.d("nombre",pa.getNombre());
+                Log.d("contra",pa.getNombre());
 
-//                Intent intent = new Intent(MainActivity.this, MostrarObjeto.class);
-//
-//                intent.putExtra("id", "admin");
-//                intent.putExtra("objeto", "gafas");
-//                startActivity(intent);
+                API.getInstance().api.newUsuario(pa).enqueue(new Callback<Boolean>() {
+
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+                        if (response.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, "Usuari afegit!", Toast.LENGTH_LONG).show();
+
+
+                        } else {
+                            Toast.makeText(MainActivity.this, "L'Usuari no s'ha pogut afegir", Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+
+
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "No connection", Toast.LENGTH_LONG).show();
+                        ProgressBar pb = (ProgressBar)findViewById(R.id.loading);
+                        pb.setVisibility(View.INVISIBLE);
+                    }
+                });
+
+
+
+
             }
         });{
 
@@ -85,34 +109,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private  void validate(String userName, String userPassword){
 
-        if((userName.equals("Admin")) && (userPassword.equals("admin")) ){
-            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-            startActivity(intent);
-
-        }else{
-            counter--;
-
-            Info.setText("No of attempts remaining: " + String.valueOf(counter));
-
-            if(counter == 0){
-                Login.setEnabled(false);
-            }
-        }
-
-
-    }
 
     void login() {
 
         String usuario = Name.getText().toString();
-        String password  = Password.getText().toString();
+        final String password  = Password.getText().toString();
 
 
 
-        Login login2 = new Login(usuario, password);
-        Log.d("Post", "onResponse. Body: " + login2.getUsername());
+        LogIn login2 = new LogIn(usuario, password);
+        Log.d("Post", "onResponse. Body: " + login2.getNombre());
 
         callLogin = API.getInstance().api.login(login2);
         callLogin.enqueue( new Callback<Boolean>() {
@@ -123,12 +130,50 @@ public class MainActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
 
-                    Toast.makeText(MainActivity.this, "Done! New track at position:" + response.body(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Loggin completat" + Name.getText().toString(), Toast.LENGTH_LONG).show();
+
+
+                    API.getInstance().api.getUsuario(Name.getText().toString()).enqueue(new Callback<Usuario>() {
+
+                        @Override
+                        public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+
+                            if (response.isSuccessful()) {
+                                Usuario juga = response.body();
+                                ((MyUsuario) getApplicationContext()).setGlobalUsuario(juga);
+
+
+                            } else {
+                                Toast.makeText(MainActivity.this, "L'Usuari no existeix, registrat!", Toast.LENGTH_LONG).show();
+
+                            }
+                        }
+
+
+
+                        @Override
+                        public void onFailure(Call<Usuario> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "No connection", Toast.LENGTH_LONG).show();
+                            ProgressBar pb = (ProgressBar)findViewById(R.id.loading);
+                            pb.setVisibility(View.INVISIBLE);
+                        }
+                    });
+
+
+
+
+
+
+
+
+
+
+
                     Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                     startActivity(intent);
 
                 } else {
-                    Toast.makeText(MainActivity.this, "Error! No track added:" + statusCode, Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "L'Usuari no existeix, registrat!", Toast.LENGTH_LONG).show();
 
                 }
 
@@ -140,6 +185,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
                 // log error here since request failed
+                Toast.makeText(MainActivity.this, "Error al conectar a ala API", Toast.LENGTH_LONG).show();
+
                 Log.d("onResponse ", "error on post API" + t.toString());
 
             }

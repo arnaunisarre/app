@@ -33,12 +33,12 @@ public class MostrarObjeto extends AppCompatActivity {
         setContentView(R.layout.activity_mostrarobjeto);
 
         Intent i = this.getIntent();
-        nombreUsuario = i.getStringExtra("id");
+
         nombreObjeto = i.getStringExtra("objeto");
 
 
 
-        API.getInstance().api.getObjeto(nombreUsuario,nombreObjeto).enqueue(new Callback<Objeto>() {
+        API.getInstance().api.getObjeto(nombreObjeto).enqueue(new Callback<Objeto>() {
             @Override
             public void onResponse(Call<Objeto> call, Response<Objeto> response) {
 

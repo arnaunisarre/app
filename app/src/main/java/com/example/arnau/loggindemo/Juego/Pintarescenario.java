@@ -19,7 +19,7 @@ public class Pintarescenario extends AppCompatActivity {
 
         GameView newGameView= new GameView(this);
         Intent i = this.getIntent();
-        newGameView.setJugador((Usuario)i.getExtras().getSerializable("usuario"));
+        newGameView.setJugador(((MyUsuario) this.getApplication()).getGlobalUsuario());
 
         // Set fullscreen
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

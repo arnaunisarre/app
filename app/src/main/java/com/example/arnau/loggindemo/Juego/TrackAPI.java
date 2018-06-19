@@ -2,8 +2,10 @@ package com.example.arnau.loggindemo.Juego;
 
 
 
-import com.example.arnau.loggindemo.Clases.Login;
+import com.example.arnau.loggindemo.Clases.LogIn;
+
 import com.example.arnau.loggindemo.Clases.Objeto;
+import com.example.arnau.loggindemo.Clases.Usuario;
 
 import java.util.List;
 
@@ -16,15 +18,24 @@ import retrofit2.http.Path;
 public interface TrackAPI {
 
 
+    @POST("/newObj")
+    Call<POST> newObjeto( @Body Objeto objeto);
 
-    @POST("json/login")
-    Call<Boolean> login (@Body Login login);
+    @POST("/new")
+    Call<Boolean> newUsuario( @Body Usuario usuario);
 
-    @GET("json/listaObjetosUsuario/{nombreusuario}")
-    Call <List<Objeto>> getlistaObjetosUser (@Path("nombreusuario") String nombreus);
+    @POST("json/inicio")
+    Call<Boolean> login (@Body LogIn login);
 
-    @GET ("json/obj/{user}/{obj}")
-    Call<Objeto> getObjeto(@Path("user") String usuario, @Path("obj") String nombreObjeto);
+    @GET("json/listar/{nombreU}")
+    Call <List<Objeto>> getlistaObjetosUser (@Path("nombreU") String nombreus);
+
+    @GET ("/Objeto/{nombre}")
+    Call<Objeto> getObjeto(@Path("nombre") String nombreObjeto);
+
+    @GET ("/Usuario/{nombre}")
+    Call<Usuario> getUsuario(@Path("nombre") String nombreUsuario);
+
 
 
 }

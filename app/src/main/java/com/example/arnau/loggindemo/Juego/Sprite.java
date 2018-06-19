@@ -117,6 +117,10 @@ public class Sprite {
                        gameView.setEscenario();
 
                    }
+                   else if(esc.celdas[posx][(posy-1)].getTipo().contains("retroceso")==true){
+                       gameView.setEscenarioMenor();
+
+                   }
                    speed = 0;
                }
 
@@ -135,6 +139,10 @@ public class Sprite {
                 }
                     else if(esc.celdas[posx -1][(posy)].getTipo().contains("puerta")==true){
                         gameView.setEscenario();
+
+                    }
+                    else if(esc.celdas[posx -1][(posy)].getTipo().contains("retroceso")==true){
+                        gameView.setEscenarioMenor();
 
                     }
                     speed = 0;
@@ -156,6 +164,10 @@ public class Sprite {
                     }
                     else if(esc.celdas[posx][(posy +1)].getTipo().contains("puerta")==true){
                         gameView.setEscenario();
+
+                    }
+                    else if(esc.celdas[posx][(posy +1)].getTipo().contains("retroceso")==true){
+                        gameView.setEscenarioMenor();
 
                     }
                     speed = 0;
@@ -181,6 +193,11 @@ public class Sprite {
                         gameView.setEscenario();
 
                     }
+                    else if(esc.celdas[posx+1][(posy)].getTipo().contains("retroceso")==true){
+                        gameView.setEscenarioMenor();
+
+                    }
+
 
                     speed = 0;
                 }

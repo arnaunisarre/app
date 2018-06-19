@@ -227,7 +227,9 @@ public class GameView  extends SurfaceView  {
         esc2.celdas[21][11].setFalsePuedopasar();
         esc2.celdas[21][0].setTipo("murobibliodrcharrb");
         esc2.celdas[21][0].setFalsePuedopasar();
-        esc2.celdas[11][0].setTipo("puerta_biblio_arriba");
+        esc2.celdas[15][0].setTipo("puerta_biblio_arriba");
+        esc2.celdas[15][0].setFalsePuedopasar();
+        esc2.celdas[11][0].setTipo("retroceso_biblio_arriba");
         esc2.celdas[11][0].setFalsePuedopasar();
 
         esc1.celdas[11][0].setTipo("puerta_biblio_arriba");
@@ -512,21 +514,11 @@ public class GameView  extends SurfaceView  {
     public void startActProva(String malo){
 
         Intent intent1 = new Intent(getContext(), Preguntas.class);
-        intent1.putExtra("usuario", jugador);
         intent1.putExtra("malo", malo);
         getContext().startActivity(intent1);
     }
 
-    public int añadirObjeto(Objeto obj){
-        Objeto p = jugador.getObjeto(obj.getNombreObjeto());
-        if (p.equals(null)){
-            jugador.miInventario.add(p);
-            return 1;
-        }
-        else
-            return 2;
 
-    }
 public void setJugador(Usuario usuario){
 
         jugador = usuario;
@@ -544,4 +536,17 @@ public  void setEscenario(){
         mostrarInstrucciones = 0;
     }
 }
+    public  void setEscenarioMenor(){
+
+        if (esc.equals(esc2)){
+            esc = esc1;
+            int o = 0;
+            mostrarInstrucciones = 0;
+        }
+        else if (esc.equals(esc3)){
+            esc = esc2;
+            int o = 0;
+            mostrarInstrucciones = 0;
+        }
+    }
 }

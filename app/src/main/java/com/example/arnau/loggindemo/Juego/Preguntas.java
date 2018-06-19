@@ -11,10 +11,18 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.arnau.loggindemo.Clases.Objeto;
 import com.example.arnau.loggindemo.Clases.Usuario;
 import com.example.arnau.loggindemo.R;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.POST;
 
 public class Preguntas extends AppCompatActivity {
 
@@ -30,6 +38,9 @@ public class Preguntas extends AppCompatActivity {
     private Objeto objeto;
     private GameView gameView;
     private Usuario jugador;
+    public  boolean existe;
+
+    private Call<Boolean> callObjeto;
 
 
     @Override
@@ -51,7 +62,8 @@ public class Preguntas extends AppCompatActivity {
         IzquierdaAbajo= (Button)findViewById(R.id.bIzquierdaAbajo);
         fotoMalo=(ImageView)findViewById(R.id.malo) ;
         Intent i = this.getIntent();
-        jugador = (Usuario)i.getExtras().getSerializable("usuario");
+        jugador = ((MyUsuario) this.getApplication()).getGlobalUsuario();
+
         malo = i.getStringExtra("malo");
 
         if (malo.equals("malo1")){
@@ -63,7 +75,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("arnau");
             respuestaCorrecta = "arnau";
             fotoMalo.setImageResource(R.drawable.malo1);
-            Objeto m = new Objeto(jugador.getId(),"calculadora","drawable/calculadora.png","permite hacer cálculos");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"calculadora","drawable/calculadora.png","permite hacer cálculos");
             setObjeto(m);
 
         }
@@ -76,8 +88,9 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("Ninguna de las anteriores");
             respuestaCorrecta = "Relación señal-ruido";
             fotoMalo.setImageResource(R.drawable.malo2);
-            Objeto m = new Objeto(jugador.getId(),"carpeta","drawable/carpeta.png","Puedes guaradr apuntes en ella");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"carpeta","drawable/carpeta.png","Puedes guaradr apuntes en ella");
             setObjeto(m);
+            Toast.makeText(Preguntas.this, "id usuario "+jugador.getNombre(), Toast.LENGTH_LONG).show();
 
         }
         if (malo.equals("malo3")){
@@ -89,7 +102,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("Muestrear a la frecuencia central es lo óptimo");
             respuestaCorrecta = "Solo es necesario muestrear \n la señal al doble de su frecuencia";
             fotoMalo.setImageResource(R.drawable.malo3);
-            Objeto m = new Objeto(jugador.getId(),"gafas","drawable/gafas.png","te permiten ver mejor");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"gafas","drawable/gafas.png","te permiten ver mejor");
             setObjeto(m);
 
         }
@@ -102,7 +115,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("Ninguna de las anteriores");
             respuestaCorrecta = "Codificar y emitir el mensaje";
             fotoMalo.setImageResource(R.drawable.malo4);
-            Objeto m = new Objeto(jugador.getId(),"compas","drawable/compas.png","puedes dibujar circumferencias");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"compas","drawable/compas.png","puedes dibujar circumferencias");
             setObjeto(m);
 
         }
@@ -116,7 +129,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("No utiliza ancho de banda");
             respuestaCorrecta = "Utiliza el doble del ancho de banda";
             fotoMalo.setImageResource(R.drawable.malo5);
-            Objeto m = new Objeto(jugador.getId(),"hoja_de_papel","drawable/hoja_papel.png","puedes apuntar cosa y dibujar en ella");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"hoja_de_papel","drawable/hoja_papel.png","puedes apuntar cosa y dibujar en ella");
             setObjeto(m);
 
         }
@@ -129,7 +142,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("Cualquier valor sirve");
             respuestaCorrecta = "50 ohmios para televisión";
             fotoMalo.setImageResource(R.drawable.malo6);
-            Objeto m = new Objeto(jugador.getId(),"lapiz","drawable/lapiz.png","puedes dibujar con él");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"lapiz","drawable/lapiz.png","puedes dibujar con él");
             setObjeto(m);
 
         }
@@ -142,7 +155,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("Un 1 en su numerador");
             respuestaCorrecta = "Una s en su numerador";
             fotoMalo.setImageResource(R.drawable.malo7);
-            Objeto m = new Objeto(jugador.getId(),"mochila","drawable/mochila.png","Te permite llevar cosas");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"mochila","drawable/mochila.png","Te permite llevar cosas");
             setObjeto(m);
 
         }
@@ -155,7 +168,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("Todas las anteriores son correctas");
             respuestaCorrecta = "Todas las anteriores son correctas";
             fotoMalo.setImageResource(R.drawable.malo8);
-            Objeto m = new Objeto(jugador.getId(),"regla","drawable/regla.png","puedes medir cosas");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"regla","drawable/regla.png","puedes medir cosas");
             setObjeto(m);
 
         }
@@ -168,7 +181,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("Ninguna de las anteriores");
             respuestaCorrecta = "Suprime una banda";
             fotoMalo.setImageResource(R.drawable.malo9);
-            Objeto m = new Objeto(jugador.getId(),"libro","drawable/libro.png","imagen");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"libro","drawable/libro.png","imagen");
             setObjeto(m);
 
         }
@@ -213,7 +226,9 @@ public class Preguntas extends AppCompatActivity {
 
         if (respuestaCorrecta.equals(respuestaUsuario)){
             Log.d("nombreobjeto", objeto.getNombreObjeto());
-            int l =1;
+
+
+
             int a = añadirObjeto(objeto);
             if (a == 1){
                 Log.d("s","s'ha afegit");
@@ -222,10 +237,8 @@ public class Preguntas extends AppCompatActivity {
             {
                 Log.d("s","ja estava  afegit");
             }
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("usuario", jugador);
-            setResult(SecondActivity.RESULT_OK, resultIntent);
-            finish();
+
+            onBackPressed();
 
         }
         else{
@@ -243,9 +256,67 @@ public class Preguntas extends AppCompatActivity {
     public int añadirObjeto(Objeto obj){
         Log.d("nombreobjeto", obj.getNombreObjeto());
 
+        API.getInstance().api.getObjeto(obj.getNombreObjeto()).enqueue(new Callback<Objeto>() {
 
-        if (jugador.getObjeto(obj.getNombreObjeto())==null){
-            jugador.miInventario.add(obj);
+            @Override
+            public void onResponse(Call<Objeto> call, Response<Objeto> response) {
+                int statusCode = response.code();
+
+                if (response.isSuccessful()) {
+
+                   existe = true;
+                    Toast.makeText(Preguntas.this, "L'objecte ja existeix!", Toast.LENGTH_LONG).show();
+
+                } else {
+                    Toast.makeText(Preguntas.this, "L'objecte no existia", Toast.LENGTH_LONG).show();
+                    existe = false;
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Objeto> call, Throwable t) {
+                existe = true;
+
+            }
+
+        });
+        if (existe==false){
+
+            API.getInstance().api.newObjeto(obj).enqueue(new Callback<POST>() {
+
+                @Override
+                public void onResponse(Call<POST> call, Response<POST> response) {
+                    int statusCode = response.code();
+
+                    if (response.isSuccessful()) {
+
+
+                        Toast.makeText(Preguntas.this, "L'objectes'ha afegit", Toast.LENGTH_LONG).show();
+
+                    }else if (response.code() == 409){
+                        Toast.makeText(Preguntas.this, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        Toast.makeText(Preguntas.this, "No s'ha pogut afegir l'objecte", Toast.LENGTH_LONG).show();
+
+
+                    }
+
+
+
+                }
+
+                @Override
+                public void onFailure(Call<POST> call, Throwable t) {
+
+                    Toast.makeText(Preguntas.this, "Error en la connexió", Toast.LENGTH_LONG).show();
+                }
+
+            });
             return 1;
         }
         else{
@@ -256,5 +327,7 @@ public class Preguntas extends AppCompatActivity {
 
     }
 
+    }
 
-}
+
+

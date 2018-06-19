@@ -7,127 +7,109 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 public class Usuario implements Serializable {
-    @SerializedName("nombre")
-    @Expose
+    private int idUsuario;
     private String nombre;
-    @SerializedName("password")
-    @Expose
     private String password;
-    @SerializedName("nivel")
-    @Expose
-    private int nivel;
-    @SerializedName("ataque")
-    @Expose
-    private int ataque;
-    @SerializedName("defensa")
-    @Expose
-    private int defensa;
-    @SerializedName("resistencia")
-    @Expose
-    private int resistencia;
+    private int posX;
+    private int posY;
+    private String nombreEscenario;
 
-
-
-    private int id;
-    public LinkedList<Objeto> miInventario = new LinkedList<Objeto>();
-
-
+    /*public Usuario(String nombre, String contraseña, int nivel, int ataque, int defensa, int resitencia){
+            this.nombre = nombre;
+            this.password = contraseña;
+            this.nivel = nivel;
+            this.ataque = ataque;
+            this.defensa = defensa;
+            this.resistencia = resitencia;
+        }*/
     public Usuario(){
 
     }
+    public Usuario(int idUsuario, String nombreUsuario, String contraseña, int posX, int posY, String nombreEscenario){
+        this.idUsuario = idUsuario;
+        this.nombre = nombreUsuario;
+        this.password = contraseña;
+        this.posX = posX;
+        this.posY = posY;
+        this.nombreEscenario = nombreEscenario;
+    }
 
-
-
-    public Usuario(String nombre, String contraseña){
-        this.nombre = nombre;
+    public Usuario(String nombreUsuario, String contraseña){
+        //this.idUsuario = idUsuario;
+        this.nombre = nombreUsuario;
         this.password = contraseña;
     }
 
     public String getNombre(){
         return nombre;
     }
+     /*public Objeto getObjeto(String nombreob) {
+         int i = 0;
+         boolean a = false;
+         Objeto e = new Objeto();
+         while (i <= miInventario.size() && a == false) {
 
-    public Objeto getObjeto(String nombreob) {
-        int i = 0;
-        boolean a = false;
-        Objeto e = new Objeto();
-        while (i < miInventario.size() && !a) {
-
-            e = miInventario.get(i);
-            if (nombreob.equals(e.getNombreObjeto())) {
-                a =true;
-            } else i++;
+             e = miInventario.get(i);
+             if (nombreob.equals(e.getNombreObjeto())) {
+                 a =true;
+             } else i++;
 
 
-        }
-        if (a == false)
-            e =null;
+         }
+         if (a == false)
+             e =null;
 
-        return e;
-    }
+         return e;
+     }*/
 
     public String getPassword() {
         return password;
-    }
-
-    public int getNivel() {
-        return nivel;
-    }
-
-    public int getAtaque() {
-        return ataque;
-    }
-
-    public int getDefensa() {
-        return defensa;
-    }
-
-    public int getResistencia() {
-        return resistencia;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    public String getNombreEscenario() {
+        return nombreEscenario;
+    }
+
+    public void setNombreEscenario(String nombreEscenario) {
+        this.nombreEscenario = nombreEscenario;
+    }
+
+
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-
-    public void setAtaque(int ataque) {
-        this.ataque = ataque;
-    }
-
-    public void setDefensa(int defensa) {
-        this.defensa = defensa;
-    }
-
-    public void setResistencia(int resistencia) {
-        this.resistencia = resistencia;
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setMiInventario(LinkedList<Objeto> miInventario) {
+    /*public void setMiInventario(LinkedList<Objeto> miInventario) {
         this.miInventario = miInventario;
+    }*/
+
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-
-    @Override
-    public String toString() {
-        return "{" +
-                "nombre='" + nombre + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
+    //public LinkedList<Objeto> getMiInventario();
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
 }

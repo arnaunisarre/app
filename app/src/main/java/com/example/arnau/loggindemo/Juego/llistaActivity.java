@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.arnau.loggindemo.Clases.Objeto;
+import com.example.arnau.loggindemo.Clases.Usuario;
 import com.example.arnau.loggindemo.R;
 
 import java.util.List;
@@ -25,8 +26,9 @@ public class llistaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llista);
+        Usuario jugador = ((MyUsuario) this.getApplication()).getGlobalUsuario();
 
-        API.getInstance().api.getlistaObjetosUser("admin").enqueue(new Callback<List<Objeto>>() {
+        API.getInstance().api.getlistaObjetosUser("liz").enqueue(new Callback<List<Objeto>>() {
 
             @Override
             public void onResponse(Call<List<Objeto>> call, Response<List<Objeto>> response) {
@@ -48,16 +50,8 @@ public class llistaActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                             Intent i = new Intent(getApplicationContext(), MostrarObjeto.class);
-
-
-
                             Objeto u = objectArray.get(position);
                             String a= u.getNombreObjeto();
-
-
-
-
-                            i.putExtra("id", "admin");
                             i.putExtra("objeto", a);
 
 
