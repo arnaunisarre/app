@@ -116,7 +116,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("No utiliza ancho de banda");
             respuestaCorrecta = "Utiliza el doble del ancho de banda";
             fotoMalo.setImageResource(R.drawable.malo5);
-            Objeto m = new Objeto(jugador.getId(),"hoja_de_papel","drawable/hoja_de_papel.png","puedes apuntar cosa y dibujar en ella");
+            Objeto m = new Objeto(jugador.getId(),"hoja_de_papel","drawable/hoja_papel.png","puedes apuntar cosa y dibujar en ella");
             setObjeto(m);
 
         }

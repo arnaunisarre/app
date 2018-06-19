@@ -1,15 +1,10 @@
 package com.example.arnau.loggindemo.Juego;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.Log;
 
 import com.example.arnau.loggindemo.Clases.Escenario;
-import com.example.arnau.loggindemo.Proves;
-
-import java.util.Random;
 
 public class Sprite {
     // direction = 0 up, 1 left, 2 down, 3 right,
@@ -118,6 +113,10 @@ public class Sprite {
                        int o = 1;
                        gameView.startActProva(esc.celdas[posx][(posy - 1)].getTipo());
                    }
+                   else if(esc.celdas[posx][(posy-1)].getTipo().contains("puerta")==true){
+                       gameView.setEscenario();
+
+                   }
                    speed = 0;
                }
 
@@ -134,6 +133,10 @@ public class Sprite {
                         int o = 1;
                         gameView.startActProva((esc.celdas[posx - 1][(posy)].getTipo()));
                 }
+                    else if(esc.celdas[posx -1][(posy)].getTipo().contains("puerta")==true){
+                        gameView.setEscenario();
+
+                    }
                     speed = 0;
 
                 }
@@ -151,6 +154,10 @@ public class Sprite {
                         int o = 1;
                         gameView.startActProva(esc.celdas[posx][(posy + 1)].getTipo());
                     }
+                    else if(esc.celdas[posx][(posy +1)].getTipo().contains("puerta")==true){
+                        gameView.setEscenario();
+
+                    }
                     speed = 0;
                 }
 
@@ -166,9 +173,15 @@ public class Sprite {
                 else{
                     if (esc.celdas[posx+1][(posy)].getTipo().contains("malo")==true){
                         //esc.celdas[posx+1][(posy)].getTipo().equals("malo1")
-                        int o =1;
+
                         gameView.startActProva(esc.celdas[posx+1][(posy)].getTipo());
                     }
+
+                    else if(esc.celdas[posx+1][(posy)].getTipo().contains("puerta")==true){
+                        gameView.setEscenario();
+
+                    }
+
                     speed = 0;
                 }
 

@@ -15,29 +15,34 @@ import android.view.SurfaceView;
 import com.example.arnau.loggindemo.Clases.Escenario;
 import com.example.arnau.loggindemo.Clases.Objeto;
 import com.example.arnau.loggindemo.Clases.Usuario;
-import com.example.arnau.loggindemo.Proves;
 import com.example.arnau.loggindemo.R;
 
 public class GameView  extends SurfaceView  {
 
-
     private Context mContext;
-
-
-
-
 
     //Rect buttonDreta = new Rect(0,0,1200,h); // Define the dimensions of the button here
 
     boolean buttonClicked;
 
     private Bitmap bHierba, bAgua,bHierba2,bHierba3,bMuro1,bSuelo1,bMuro2;
+    private Bitmap bSueloBiblio, bEstanteria, bMuroBiblio, bPuertaBiblioAbj, bPuertaBiblioArrb;
+    private Bitmap bPuertaBiblioDrch, bSueloAula, bMuroAula;
+    private Bitmap bEstanteriaAtras, bEstanteriaLateralDrch,bEstanteriaLateralIzq;
+    private Bitmap bMostradorLateral, bMostrador, bMostradorEsqIzqAbj, bMostradorEsqIzqArrb;
+    private Bitmap bMostradorDrchArrb, bMostradorDrchAbj;
+    private Bitmap bMuroBIzq, bMuroBDrch, bMuroBIzqArrb, bMuroBDrchArrb;
+    private Bitmap bMuroBArrb, bMuroBLatIzq, bMuroBLatDrch;
     private Bitmap personaje;
     private Bitmap malo1,malo2,malo3,malo4,malo5,malo6,malo7,malo8,malo9,malo10;
     private Bitmap botonDerecha, botonIzquierda, botonArriba, botonAbajo;
     private Bitmap instrucciones;
     //private Escenario esc  = new Escenario("a",22,12);
     private Escenario esc  = new Escenario("a",22,12);
+    private Escenario esc1  = new Escenario("a",22,12);
+    private Escenario esc2  = new Escenario("b",22,12);
+    private Escenario esc3  = new Escenario("c",22,12);
+
     private SurfaceHolder holder;
     private GameLoopThread gameLoopThread;
     private Sprite sprite;
@@ -50,6 +55,7 @@ public class GameView  extends SurfaceView  {
 
     public GameView(Context context) {
         super(context);
+        esc = esc1;
         gameLoopThread = new GameLoopThread(this);
         holder = getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -66,11 +72,10 @@ public class GameView  extends SurfaceView  {
                 }
             }
 
-
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 //Canvas c = holder.lockCanvas(null);
-               //dibujar(c,esc);
+                //dibujar(c,esc);
                 //holder.unlockCanvasAndPost(c);
 
                 gameLoopThread.setRunning(true);
@@ -83,59 +88,153 @@ public class GameView  extends SurfaceView  {
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             }
         });
-
+        //bitmaps de suelos
         bHierba = BitmapFactory.decodeResource(getResources(), R.drawable.hierba);
         bHierba2 = BitmapFactory.decodeResource(getResources(), R.drawable.hierba2);
         bHierba3 = BitmapFactory.decodeResource(getResources(), R.drawable.hierba3);
+        bAgua = BitmapFactory.decodeResource(getResources(), R.drawable.agua);
+        bSueloBiblio = BitmapFactory.decodeResource(getResources(), R.drawable.suelo_biblio);
+        bEstanteria = BitmapFactory.decodeResource(getResources(),R.drawable.estanteria);
+        bSueloAula = BitmapFactory.decodeResource(getResources(),R.drawable.suelo_clase);
+
+
+        //bitmaps de Muros
         bMuro1 = BitmapFactory.decodeResource(getResources(), R.drawable.muro1);
         bMuro2 = BitmapFactory.decodeResource(getResources(), R.drawable.muro2);
         bSuelo1 = BitmapFactory.decodeResource(getResources(), R.drawable.suelo1);
+        bMuroBiblio = BitmapFactory.decodeResource(getResources(),R.drawable.pared_biblio);
+        bMuroBIzq = BitmapFactory.decodeResource(getResources(),R.drawable.murobiblioizq);
+        bMuroBIzqArrb = BitmapFactory.decodeResource(getResources(),R.drawable.murobiblioizqarrb);
+        bMuroBDrch = BitmapFactory.decodeResource(getResources(),R.drawable.murobibliodrch);
+        bMuroBDrchArrb = BitmapFactory.decodeResource(getResources(),R.drawable.murobibliodrcharrb);
+        bMuroBArrb= BitmapFactory.decodeResource(getResources(),R.drawable.pared_biblioarrb);
+        bMuroBLatDrch= BitmapFactory.decodeResource(getResources(),R.drawable.pared_bibliodrch);
+        bMuroBLatIzq= BitmapFactory.decodeResource(getResources(),R.drawable.pared_biblioizq);
 
-        bAgua = BitmapFactory.decodeResource(getResources(), R.drawable.agua);
+        //añadir muro aula bMuroAula = BitmapFactory.decodeResource(getResources(), R.drawable.)
+        //bitmaps de Puertas
+        bPuertaBiblioAbj = BitmapFactory.decodeResource(getResources(),R.drawable.puerta_biblio_abajo);
+        bPuertaBiblioArrb= BitmapFactory.decodeResource(getResources(),R.drawable.puerta_biblio_arriba);
+        bPuertaBiblioDrch = BitmapFactory.decodeResource(getResources(),R.drawable.puerta_biblio_derecha);
+        //Bitmaps mobiliario biblio
+
+        bEstanteriaAtras = BitmapFactory.decodeResource(getResources(),R.drawable.estanteria_atras);
+        bEstanteriaLateralDrch = BitmapFactory.decodeResource(getResources(),R.drawable.estanteria_lado);
+        bMostradorLateral = BitmapFactory.decodeResource(getResources(),R.drawable.mostrador_lateral);
+        bMostrador = BitmapFactory.decodeResource(getResources(),R.drawable.mostrador_centro);
+        bMostradorEsqIzqAbj= BitmapFactory.decodeResource(getResources(),R.drawable.mostrador_esquina_izquierda);
+        bMostradorEsqIzqArrb= BitmapFactory.decodeResource(getResources(),R.drawable.mostrador_arriba_izquierda);
+        bMostradorDrchArrb= BitmapFactory.decodeResource(getResources(),R.drawable.mostrador_arriba_derecha);
+        bMostradorDrchAbj= BitmapFactory.decodeResource(getResources(),R.drawable.mostrador_esquina_derecha);
+
 
         instrucciones = BitmapFactory.decodeResource(getResources(), R.drawable.fons);
+
         botonDerecha = BitmapFactory.decodeResource(getResources(),R.drawable.flecha_gris_derecha);
         botonIzquierda = BitmapFactory.decodeResource(getResources(),R.drawable.flecha_gris_izquierda);
         botonArriba = BitmapFactory.decodeResource(getResources(),R.drawable.flecha_gris_arriba);
         botonAbajo = BitmapFactory.decodeResource(getResources(),R.drawable.flecha_gris_abajo);
 
 
+        //ESCENARIO1 con celdas tipo Y para muros
+        for(int p=0;p<esc1.getNumVerticales();p++) {
+            esc1.celdas[0][p].setTipo("y");
+            esc1.celdas[0][p].setFalsePuedopasar();
+        }
+        for(int p=0;p<esc1.getNumVerticales();p++) {
+            esc1.celdas[esc1.getNumHorizontales()-1][p].setTipo("y");
+            esc1.celdas[esc1.getNumHorizontales()-1][p].setFalsePuedopasar();
+        }
+        for(int p=0;p<esc1.getNumHorizontales();p++) {
+            esc1.celdas[p][0].setTipo("y");
+            esc1.celdas[p][0].setFalsePuedopasar();
+        }
+        for(int p=0;p<esc1.getNumHorizontales();p++) {
+            esc1.celdas[p][esc1.getNumVerticales()-1].setTipo("y");
+            esc1.celdas[p][esc1.getNumVerticales()-1].setFalsePuedopasar();
+        }
+        //ESCENARIO2 con celdas tipo Z para muros
+        for(int p=0;p<esc2.getNumVerticales();p++) {
+            esc2.celdas[0][p].setTipo("z");
+            esc2.celdas[0][p].setFalsePuedopasar();
+        }
+        for(int p=0;p<esc2.getNumVerticales();p++) {
+            esc2.celdas[esc2.getNumHorizontales()-1][p].setTipo("z");
+            esc2.celdas[esc2.getNumHorizontales()-1][p].setFalsePuedopasar();
+        }
+        for(int p=0;p<esc2.getNumHorizontales();p++) {
+            esc2.celdas[p][0].setTipo("z");
+            esc2.celdas[p][0].setFalsePuedopasar();
+        }
+        for(int p=0;p<esc2.getNumHorizontales();p++) {
+            esc2.celdas[p][esc2.getNumVerticales()-1].setTipo("z");
+            esc2.celdas[p][esc2.getNumVerticales()-1].setFalsePuedopasar();
+        }
+        //        //ESCENARIO3 con celdas tipo W para muros
 
-        for(int p=0;p<esc.getNumVerticales();p++) {
-            esc.celdas[0][p].setTipo("y");
-            esc.celdas[0][p].setFalsePuedopasar();
+        esc2.celdas[9][1].setTipo("malo1");
+        esc2.celdas[9][1].setFalsePuedopasar();
+        esc2.celdas[1][6].setTipo("malo9");
+        esc2.celdas[1][6].setFalsePuedopasar();
+        esc2.celdas[7][10].setTipo("malo4");
+        esc2.celdas[7][10].setFalsePuedopasar();
+
+        esc1.celdas[5][2].setTipo("malo2");
+        esc1.celdas[5][2].setFalsePuedopasar();
+        esc1.celdas[4][5].setTipo("malo3");
+        esc1.celdas[4][5].setFalsePuedopasar();
+        esc1.celdas[15][4].setTipo("malo5");
+        esc1.celdas[15][4].setFalsePuedopasar();
+        esc1.celdas[20][1].setTipo("malo6");
+        esc1.celdas[20][1].setFalsePuedopasar();
+        esc1.celdas[17][9].setTipo("malo7");
+        esc1.celdas[17][9].setFalsePuedopasar();
+        esc1.celdas[3][7].setTipo("malo8");
+        esc1.celdas[3][7].setFalsePuedopasar();
+        esc1.celdas[1][6].setTipo("malo9");
+        esc1.celdas[1][6].setFalsePuedopasar();
+
+        //mobiliario de la biblioteca ESC2
+        // columna/fila
+        //parte superior
+        for( int i = 0; i < 21; i++){
+            esc2.celdas[i][0].setTipo("pared_biblioarrb");
+            esc2.celdas[i][0].setFalsePuedopasar();
         }
-        for(int p=0;p<esc.getNumVerticales();p++) {
-            esc.celdas[esc.getNumHorizontales()-1][p].setTipo("y");
-            esc.celdas[esc.getNumHorizontales()-1][p].setFalsePuedopasar();
-        }
-        for(int p=0;p<esc.getNumHorizontales();p++) {
-            esc.celdas[p][0].setTipo("y");
-            esc.celdas[p][0].setFalsePuedopasar();
-        }
-        for(int p=0;p<esc.getNumHorizontales();p++) {
-            esc.celdas[p][esc.getNumVerticales()-1].setTipo("y");
-            esc.celdas[p][esc.getNumVerticales()-1].setFalsePuedopasar();
+        //parte inferios
+        for( int i = 0; i < 21; i++) {
+            esc2.celdas[i][11].setTipo("pared_biblio");
+            esc2.celdas[i][11].setFalsePuedopasar();
         }
 
-        esc.celdas[9][1].setTipo("malo1");
-        esc.celdas[9][1].setFalsePuedopasar();
-        esc.celdas[5][2].setTipo("malo2");
-        esc.celdas[5][2].setFalsePuedopasar();
-        esc.celdas[4][5].setTipo("malo3");
-        esc.celdas[4][5].setFalsePuedopasar();
-        esc.celdas[7][10].setTipo("malo4");
-        esc.celdas[7][10].setFalsePuedopasar();
-        esc.celdas[15][4].setTipo("malo5");
-        esc.celdas[15][4].setFalsePuedopasar();
-        esc.celdas[20][1].setTipo("malo6");
-        esc.celdas[20][1].setFalsePuedopasar();
-        esc.celdas[17][9].setTipo("malo7");
-        esc.celdas[17][9].setFalsePuedopasar();
-        esc.celdas[3][7].setTipo("malo8");
-        esc.celdas[3][7].setFalsePuedopasar();
-        esc.celdas[1][6].setTipo("malo9");
-        esc.celdas[1][6].setFalsePuedopasar();
+       //laterales biblioteca derecha
+        for( int j = 0; j < 11; j++) {
+            esc2.celdas[21][j].setTipo("pared_bibliodrch");
+            esc2.celdas[21][j].setFalsePuedopasar();
+        }
+
+        //laterales biblioteca izquierda
+        for( int j = 0; j < 11; j++) {
+            esc2.celdas[0][j].setTipo("pared_biblioizq");
+            esc2.celdas[0][j].setFalsePuedopasar();
+        }
+        //esquinas biblio
+        esc2.celdas[0][0].setTipo("murobiblioizqarrb");
+        esc2.celdas[0][0].setFalsePuedopasar();
+        esc2.celdas[0][11].setTipo("murobiblioizq");
+        esc2.celdas[0][11].setFalsePuedopasar();
+        esc2.celdas[21][11].setTipo("murobibliodrch");
+        esc2.celdas[21][11].setFalsePuedopasar();
+        esc2.celdas[21][0].setTipo("murobibliodrcharrb");
+        esc2.celdas[21][0].setFalsePuedopasar();
+        esc2.celdas[11][0].setTipo("puerta_biblio_arriba");
+        esc2.celdas[11][0].setFalsePuedopasar();
+
+        esc1.celdas[11][0].setTipo("puerta_biblio_arriba");
+        esc1.celdas[11][0].setFalsePuedopasar();
+
+        //        bMuroBDrch = BitmapFactory.decodeResource(getResources(),R.drawable.muroBibliodrch);
+        //mobiliario de la clase
 
 
         personaje = BitmapFactory.decodeResource(getResources(), R.drawable.bad5);
@@ -152,17 +251,10 @@ public class GameView  extends SurfaceView  {
         malo9 = BitmapFactory.decodeResource(getResources(), R.drawable.malo9);
         malo10 = BitmapFactory.decodeResource(getResources(), R.drawable.malo10);
 
-
-
-
-
     }
 
-
-
     protected void dibujarPersonaje(Canvas canvas){
-
-
+        //he cambiado a esc2
         dibujar(canvas,esc);
         sprite.dibujar(canvas,esc);
         dibujarBotones(canvas);
@@ -176,9 +268,6 @@ public class GameView  extends SurfaceView  {
 //        }
 //        Boolean a;
 //        a= false;
-
-
-
 
     }
 
@@ -194,39 +283,39 @@ public class GameView  extends SurfaceView  {
 
     }
 
-
-
     protected void dibujar(Canvas canvas, Escenario escenario) {
-        Log.d("HOLA","HOLA");
+        Log.d("HOLA", "HOLA");
 
         canvas.drawColor(Color.WHITE);
 
         int width = getWidth();
         int height = getHeight();
 
-        int l= 0;
-        l= width/escenario.getNumHorizontales();
-        int h =0;
-        h= height/escenario.getNumVerticales();
+        int l = 0;
+        l = width / escenario.getNumHorizontales();
+        int h = 0;
+        h = height / escenario.getNumVerticales();
         setLongitudy(h);
         setLongitudx(l);
-        int l2 =0;
-        l2= (int) (l*1.1);
-        int h2 =0;
-        h2= h;
+        int l2 = 0;
+        l2 = (int) (l * 1.1);
+        int h2 = 0;
+        h2 = h;
 
-
-        // l2= l+20;
-        //h = h+2;
-        for(int j=0;j<escenario.getNumHorizontales();j++) {
+        for (int j = 0; j < escenario.getNumHorizontales(); j++) {
 
             for (int i = 0; i < escenario.getNumVerticales(); i++) {
                 //int x = (l/1)*j;
                 //int y = (h/1)*i;
-                int x = (90)*j;
-               int  y = (90)*i;
-                if (escenario.celdas[j][i].getTipo().equals("x")) {
+                int x = (90) * j;
+                int y = (90) * i;
+
+                //para escenario 1
+                if (escenario.celdas[j][i].getTipo().equals("x")&&escenario.equals(esc1)) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("x")&&escenario.equals(esc2)) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                 }
                 else if (escenario.celdas[j][i].getTipo().equals("malo1")) {
@@ -234,67 +323,103 @@ public class GameView  extends SurfaceView  {
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo1, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }
-                else if (escenario.celdas[j][i].getTipo().equals("malo2")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo2")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo2, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }
-                else if (escenario.celdas[j][i].getTipo().equals("malo3")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo3")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo3, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }
-                else if (escenario.celdas[j][i].getTipo().equals("malo4")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo4")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo4, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }
-                else if (escenario.celdas[j][i].getTipo().equals("malo5")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo5")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo5, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }
-                else if (escenario.celdas[j][i].getTipo().equals("malo6")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo6")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo6, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }
-                else if (escenario.celdas[j][i].getTipo().equals("malo7")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo7")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo7, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }
-                else if (escenario.celdas[j][i].getTipo().equals("malo8")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo8")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo8, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }
-                else if (escenario.celdas[j][i].getTipo().equals("malo9")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo9")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo9, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }
-                else if(escenario.celdas[j][i].getTipo().equals("y")){
-                    Bitmap b2 = Bitmap.createScaledBitmap(bMuro2, h2, l2, false);
+                } else if (escenario.celdas[j][i].getTipo().equals("y")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuro1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("puerta_biblio_arriba")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bPuertaBiblioArrb, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                 }
-
+                    //para escenario 2
+                   else if (escenario.celdas[j][i].getTipo().equals("suelob")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                    } else if (escenario.celdas[j][i].getTipo().equals("malo1")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                        Bitmap b3 = Bitmap.createScaledBitmap(malo1, h2, l2, false);
+                        canvas.drawBitmap(b3, x, y, null);
+                    } else if (escenario.celdas[j][i].getTipo().equals("pared_biblioarrb")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBArrb, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                    } else if (escenario.celdas[j][i].getTipo().equals("pared_biblio")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBiblio, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                    } else if (escenario.celdas[j][i].getTipo().equals("malo4")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                        Bitmap b3 = Bitmap.createScaledBitmap(malo4, h2, l2, false);
+                        canvas.drawBitmap(b3, x, y, null);
+                    } else if (escenario.celdas[j][i].getTipo().equals("pared_bibliodrch")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBLatDrch, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                    } else if (escenario.celdas[j][i].getTipo().equals("pared_biblioizq")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBLatIzq, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                    } else if (escenario.celdas[j][i].getTipo().equals("murobiblioizqarrb")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBIzqArrb, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                    } else if (escenario.celdas[j][i].getTipo().equals("murobiblioizq")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBIzq, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                    } else if (escenario.celdas[j][i].getTipo().equals("murobibliodrch")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBDrch, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                    } else if (escenario.celdas[j][i].getTipo().equals("murobibliodrcharrb")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBDrchArrb, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                    } else if (escenario.celdas[j][i].getTipo().equals("malo10")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                        Bitmap b3 = Bitmap.createScaledBitmap(malo10, h2, l2, false);
+                        canvas.drawBitmap(b3, x, y, null);
+                    }
+                    //para escenario 3
+                    // System.out.println("");
+                }
             }
-           // System.out.println("");
+
         }
-
-
-
-    }
     protected void dibujarInstrucciones(Canvas canvas){
 
         Bitmap b2 = Bitmap.createScaledBitmap(instrucciones,getWidth(), getHeight(), false);
@@ -344,6 +469,7 @@ public class GameView  extends SurfaceView  {
 //                Log.d("pos", "nada");
 //            }
         }
+        //he cambiado a esc2
         if(event.getAction()==MotionEvent.ACTION_UP){
             if (buttonDreta.contains((int) event.getX(), (int) event.getY())) {
                 buttonClicked = true;
@@ -405,5 +531,17 @@ public void setJugador(Usuario usuario){
 
         jugador = usuario;
 }
+public  void setEscenario(){
 
+        if (esc.equals(esc1)){
+            esc = esc2;
+            int o = 0;
+            mostrarInstrucciones = 0;
+        }
+    else if (esc.equals(esc2)){
+        esc = esc3;
+        int o = 0;
+        mostrarInstrucciones = 0;
+    }
+}
 }

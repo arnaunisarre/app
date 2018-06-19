@@ -1,6 +1,5 @@
 package com.example.arnau.loggindemo.Clases;
 
-import com.example.arnau.loggindemo.Clases.Objeto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -121,15 +120,6 @@ public class Usuario implements Serializable {
     public void setMiInventario(LinkedList<Objeto> miInventario) {
         this.miInventario = miInventario;
     }
-
-
-
-
-
-
-
-
-
 
 
     @Override
