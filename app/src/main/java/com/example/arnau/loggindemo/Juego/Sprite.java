@@ -32,10 +32,6 @@ public class Sprite {
         this.height = bmp.getHeight() / BMP_ROWS;
         this.gameView = gameView;
         this.bmp = bmp;
-
-//        Random rnd = new Random(System.currentTimeMillis());
-//        xSpeed = rnd.nextInt(50) - 5;
-//        ySpeed = rnd.nextInt(50) - 5;
     }
 
     private void update() {
@@ -43,15 +39,11 @@ public class Sprite {
         if(speed!=0) {
             currentFrame = ++currentFrame % BMP_COLUMNS;
         }
-
         switch (direction) {
 
             case 0:     //up
                 if (y>posy*90) {
                     y -= 15;
-
-
-
                 }
                 else
                     stop();
@@ -75,16 +67,13 @@ public class Sprite {
                 break;
             case 3:     //right
                 if (x<posx*90) {
-
                     x += 15;
-
                 }
                 else
                     stop();
                 break;
             case 4:
                 break;
-
         }
     }
     public void dibujar(Canvas canvas, Escenario esc) {
@@ -109,7 +98,6 @@ public class Sprite {
                else {
 
                    if (esc.celdas[posx][(posy - 1)].getTipo().contains("malo")==true) {
-                       //esc.celdas[posx][(posy - 1)].getTipo().equals("malo1")
                        int o = 1;
                        gameView.startActProva(esc.celdas[posx][(posy - 1)].getTipo());
                    }
@@ -191,17 +179,9 @@ public class Sprite {
                     }
                     else if(esc.celdas[posx+1][(posy)].getTipo().contains("retroceso")==true){
                         gameView.setEscenarioMenor();
-
                     }
-
-
                     speed = 0;
                 }
-
-
-
-                break;
-            case 4:
                 break;
 
         }

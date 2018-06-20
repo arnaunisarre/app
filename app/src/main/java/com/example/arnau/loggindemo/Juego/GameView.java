@@ -192,8 +192,7 @@ public class GameView  extends SurfaceView  {
 //        }
         for( int i = 0; i < 21; i++) {
             if( (i<6) || ((i>9) &&(i<15)) ){
-                esc2.celdas[i][1].setTipo("estanteria");
-                esc2.celdas[i][1].setFalsePuedopasar();
+
                 esc2.celdas[i][4].setTipo("estanteria_atras");
                 esc2.celdas[i][4].setFalsePuedopasar();
                 esc2.celdas[i][7].setTipo("estanteria");
@@ -202,6 +201,14 @@ public class GameView  extends SurfaceView  {
                 esc2.celdas[i][9].setFalsePuedopasar();
             }
             }
+        esc2.celdas[10][1].setTipo("estanteria");
+        esc2.celdas[10][1].setFalsePuedopasar();
+        esc2.celdas[12][1].setTipo("estanteria");
+        esc2.celdas[12][1].setFalsePuedopasar();
+        esc2.celdas[13][1].setTipo("estanteria");
+        esc2.celdas[13][1].setFalsePuedopasar();
+        esc2.celdas[14][1].setTipo("estanteria");
+        esc2.celdas[14][1].setFalsePuedopasar();
         esc2.celdas[10][3].setTipo("estanteria_atras");
         esc2.celdas[11][3].setTipo("estanteria_atras");
         esc2.celdas[12][3].setTipo("estanteria_atras");
@@ -709,6 +716,9 @@ public class GameView  extends SurfaceView  {
                     canvas.drawBitmap(b2, x, y, null);
                 }else if (escenario.celdas[j][i].getTipo().equals("retroceso_biblio_arriba")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bPuertaBiblioArrb_volver, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("puerta_biblio_derecha")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bPuertaBiblioDrch, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                 }
                     // System.out.println("");
