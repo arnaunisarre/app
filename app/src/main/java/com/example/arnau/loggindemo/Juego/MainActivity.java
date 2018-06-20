@@ -110,9 +110,10 @@ public class MainActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 Usuario juga = response.body();
                                 ((MyUsuario) getApplicationContext()).setGlobalUsuario(juga);
-                            } //else {
-                               // Toast.makeText(MainActivity.this, "L'Usuari no existeix, registrat!", Toast.LENGTH_LONG).show();
-                            //}
+                            } else {
+                               Toast.makeText(MainActivity.this, "L'Usuari no existeix, registrat!", Toast.LENGTH_LONG).show();
+
+                            }
                         }
                         @Override
                         public void onFailure(Call<Usuario> call, Throwable t) {

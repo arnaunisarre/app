@@ -92,41 +92,37 @@ public class Sprite {
         switch (direction) {
             case 0://up
 
-                valido = esc.celdas[posx][(posy-1)].getPuedopasar();
-               if (valido==true )
-                posy =  posy-1;
-               else {
+                valido = esc.celdas[posx][(posy - 1)].getPuedopasar();
+                if (valido == true)
+                    posy = posy - 1;
+                else {
 
-                   if (esc.celdas[posx][(posy - 1)].getTipo().contains("malo")==true) {
-                       int o = 1;
-                       gameView.startActProva(esc.celdas[posx][(posy - 1)].getTipo());
-                   }
-                   else if(esc.celdas[posx][(posy-1)].getTipo().contains("puerta")==true){
-                       gameView.setEscenario();
+                    if (esc.celdas[posx][(posy - 1)].getTipo().contains("malo") == true) {
+                        int o = 1;
+                        gameView.startActProva(esc.celdas[posx][(posy - 1)].getTipo());
+                    } else if (esc.celdas[posx][(posy - 1)].getTipo().contains("puerta") == true) {
+                        gameView.setEscenario();
 
-                   }
-                   else if(esc.celdas[posx][(posy-1)].getTipo().contains("retroceso")==true){
-                       gameView.setEscenarioMenor();
+                    } else if (esc.celdas[posx][(posy - 1)].getTipo().contains("retroceso") == true) {
+                        gameView.setEscenarioMenor();
 
-                   }
-                   speed = 0;
-               }
+                    }
+                    speed = 0;
+                }
 
                 break;
             case 1:     //left
-                valido = esc.celdas[posx-1][(posy)].getPuedopasar();
+                valido = esc.celdas[posx - 1][(posy)].getPuedopasar();
 
-                if (valido ==true )
-                posx = posx-1;
-                else{
-                    if (esc.celdas[posx-1][(posy)].getTipo().contains("malo")==true) {
+                if (valido == true)
+                    posx = posx - 1;
+                else {
+                    if (esc.celdas[posx - 1][(posy)].getTipo().contains("malo") == true) {
                         int o = 1;
                         gameView.startActProva((esc.celdas[posx - 1][(posy)].getTipo()));
-                    }
-                    else if(esc.celdas[posx -1][(posy)].getTipo().contains("puerta")==true){
+                    } else if (esc.celdas[posx - 1][(posy)].getTipo().contains("puerta") == true) {
                         gameView.setEscenario();
-                    }
-                    else if(esc.celdas[posx -1][(posy)].getTipo().contains("retroceso")==true){
+                    } else if (esc.celdas[posx - 1][(posy)].getTipo().contains("retroceso") == true) {
                         gameView.setEscenarioMenor();
                     }
                     speed = 0;
@@ -135,22 +131,20 @@ public class Sprite {
 
                 break;
             case 2:     //down
-                int q = posy+1;
-                valido = esc.celdas[posx][(posy+1)].getPuedopasar();
-                if (valido==true )
-                posy = posy+1;
+                int q = posy + 1;
+                valido = esc.celdas[posx][(posy + 1)].getPuedopasar();
+                if (valido == true)
+                    posy = posy + 1;
                 else {
 
-                    if (esc.celdas[posx][(posy + 1)].getTipo().contains("malo")==true) {
+                    if (esc.celdas[posx][(posy + 1)].getTipo().contains("malo") == true) {
                         //esc.celdas[posx][(posy + 1)].getTipo().equals("malo1")
                         int o = 1;
                         gameView.startActProva(esc.celdas[posx][(posy + 1)].getTipo());
-                    }
-                    else if(esc.celdas[posx][(posy +1)].getTipo().contains("puerta")==true){
+                    } else if (esc.celdas[posx][(posy + 1)].getTipo().contains("puerta") == true) {
                         gameView.setEscenario();
 
-                    }
-                    else if(esc.celdas[posx][(posy +1)].getTipo().contains("retroceso")==true){
+                    } else if (esc.celdas[posx][(posy + 1)].getTipo().contains("retroceso") == true) {
                         gameView.setEscenarioMenor();
 
                     }
@@ -160,32 +154,26 @@ public class Sprite {
                 break;
 
             case 3:     //right
-                valido = esc.celdas[posx+1][(posy)].getPuedopasar();
-                if (valido==true ){
+                valido = esc.celdas[posx + 1][(posy)].getPuedopasar();
+                if (valido == true) {
 
-                    posx = posx+1;
-                }
-
-                else{
-                    if (esc.celdas[posx+1][(posy)].getTipo().contains("malo")==true){
+                    posx = posx + 1;
+                } else {
+                    if (esc.celdas[posx + 1][(posy)].getTipo().contains("malo") == true) {
                         //esc.celdas[posx+1][(posy)].getTipo().equals("malo1")
 
-                        gameView.startActProva(esc.celdas[posx+1][(posy)].getTipo());
-                    }
-
-                    else if(esc.celdas[posx+1][(posy)].getTipo().contains("puerta")==true){
+                        gameView.startActProva(esc.celdas[posx + 1][(posy)].getTipo());
+                    } else if (esc.celdas[posx + 1][(posy)].getTipo().contains("puerta") == true) {
                         gameView.setEscenario();
 
-                    }
-                    else if(esc.celdas[posx+1][(posy)].getTipo().contains("retroceso")==true){
+                    } else if (esc.celdas[posx + 1][(posy)].getTipo().contains("retroceso") == true) {
                         gameView.setEscenarioMenor();
+
                     }
                     speed = 0;
                 }
                 break;
-
         }
-
     }
     // direction = 0 up, 1 left, 2 down, 3 right,
     // animation = 3 back, 1 left, 0 front, 2 right

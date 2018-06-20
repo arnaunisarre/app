@@ -24,10 +24,10 @@ public interface TrackAPI {
     @POST("/new")
     Call<Boolean> newUsuario( @Body Usuario usuario);
 
-    @POST("json/inicio")
+    @POST("/inicio")
     Call<Boolean> login (@Body LogIn login);
 
-    @GET("json/listar/{nombreU}")
+    @GET("/listar/{nombreU}")
     Call <List<Objeto>> getlistaObjetosUser (@Path("nombreU") String nombreus);
 
     @GET ("/Objeto/{nombre}")

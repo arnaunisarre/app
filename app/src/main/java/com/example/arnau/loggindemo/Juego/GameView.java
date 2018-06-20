@@ -24,10 +24,10 @@ public class GameView  extends SurfaceView  {
 
     boolean buttonClicked;
 
-    private Bitmap bHierba, bAgua,bHierba2,bHierba3,bMuro1,bSuelo1,bMuro2;
+    private Bitmap bHierba, bAgua,bHierba2,bHierba3,bMuro1,bSuelo1,bMuro2, bPuertaAulaVolver;
     private Bitmap bSueloBiblio, bEstanteria, bMuroBiblio, bPuertaBiblioAbj, bPuertaBiblioArrb;
-    private Bitmap bPuertaBiblioDrch, bSueloAula, bPuertaBiblioArrb_volver;
-    private Bitmap bEstanteriaAtras, bEstanteriaLateralDrch, bSofa;
+    private Bitmap bPuertaBiblioDrch, bSueloAula, bPuertaBiblioArrb_volver, bPuertaAula;
+    private Bitmap bEstanteriaAtras, bEstanteriaLateralDrch, bSofa, bPuertaBiblioVolver;
     private Bitmap bMostradorLateral, bMostrador, bMostradorEsqIzqAbj, bMostradorEsqIzqArrb;
     private Bitmap bMostradorDrchArrb, bMostradorDrchAbj;
     private Bitmap bMuroBIzq, bMuroBDrch, bMuroBIzqArrb, bMuroBDrchArrb;
@@ -133,6 +133,9 @@ public class GameView  extends SurfaceView  {
         bPuertaBiblioArrb= BitmapFactory.decodeResource(getResources(),R.drawable.puerta_biblio_arriba);
         bPuertaBiblioDrch = BitmapFactory.decodeResource(getResources(),R.drawable.puerta_biblio_derecha);
         bPuertaBiblioArrb_volver= BitmapFactory.decodeResource(getResources(),R.drawable.puerta_biblio_arriba_volver);
+        bPuertaBiblioVolver= BitmapFactory.decodeResource(getResources(),R.drawable.retroceso_biblio);
+        bPuertaAula = BitmapFactory.decodeResource(getResources(),R.drawable.puerta_aula_derecha);
+        bPuertaAulaVolver = BitmapFactory.decodeResource(getResources(),R.drawable.retroceso_clase);
         //Bitmaps mobiliario biblio
 
         bEstanteriaAtras = BitmapFactory.decodeResource(getResources(),R.drawable.estanteria_atras);
@@ -332,7 +335,7 @@ public class GameView  extends SurfaceView  {
         esc2.celdas[21][0].setFalsePuedopasar();
         esc2.celdas[15][0].setTipo("puerta_biblio_arriba");
         esc2.celdas[15][0].setFalsePuedopasar();
-        esc2.celdas[11][0].setTipo("retroceso_biblio_arriba");
+        esc2.celdas[11][0].setTipo("retroceso_biblio");
         esc2.celdas[11][0].setFalsePuedopasar();
         esc1.celdas[11][0].setTipo("puerta_biblio_arriba");
         esc1.celdas[11][0].setFalsePuedopasar();
@@ -377,9 +380,9 @@ public class GameView  extends SurfaceView  {
         esc3.celdas[21][11].setFalsePuedopasar();
         esc3.celdas[21][0].setTipo("muroclaseesq2");
         esc3.celdas[21][0].setFalsePuedopasar();
-        esc3.celdas[21][6].setTipo("puerta_biblio_derecha");
+        esc3.celdas[21][6].setTipo("puerta_aula_derecha");
         esc3.celdas[21][6].setFalsePuedopasar();
-        esc3.celdas[15][0].setTipo("retroceso_biblio_arriba");
+        esc3.celdas[15][0].setTipo("retroceso_clase");
         esc3.celdas[15][0].setFalsePuedopasar();
         //mesa y silla
         esc3.celdas[5][3].setTipo("mesa_silla");
@@ -551,36 +554,36 @@ public class GameView  extends SurfaceView  {
                 int y = (90) * i;
 
                 //para escenario 1
-                if (escenario.celdas[j][i].getTipo().equals("x")&&escenario.equals(esc1)) {
+                if (escenario.celdas[j][i].getTipo().equals("x") && escenario.equals(esc1)) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("x")&&escenario.equals(esc2)) {
+                } else if (escenario.celdas[j][i].getTipo().equals("x") && escenario.equals(esc2)) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("x")&&escenario.equals(esc3)) {
+                } else if (escenario.celdas[j][i].getTipo().equals("x") && escenario.equals(esc3)) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSueloAula, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("malo2")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                        Bitmap b3 = Bitmap.createScaledBitmap(malo2, h2, l2, false);
-                        canvas.drawBitmap(b3, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("malo3")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo2")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo2, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("malo3")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSueloAula, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo3, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("malo5")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo5")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSueloAula, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo5, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("malo7")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo7")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSueloAula, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo7, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("malo8")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo8")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo8, h2, l2, false);
@@ -590,7 +593,7 @@ public class GameView  extends SurfaceView  {
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo6, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("malo9")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("malo9")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo9, h2, l2, false);
@@ -602,130 +605,138 @@ public class GameView  extends SurfaceView  {
                     Bitmap b2 = Bitmap.createScaledBitmap(bPuertaBiblioArrb, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                 }
-                    //para escenario 2
-                   else if (escenario.celdas[j][i].getTipo().equals("suelob")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                    } else if (escenario.celdas[j][i].getTipo().equals("malo1")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                        Bitmap b3 = Bitmap.createScaledBitmap(malo1, h2, l2, false);
-                        canvas.drawBitmap(b3, x, y, null);
-                    } else if (escenario.celdas[j][i].getTipo().equals("pared_biblioarrb")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBArrb, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                    } else if (escenario.celdas[j][i].getTipo().equals("pared_biblio")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBiblio, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                    } else if (escenario.celdas[j][i].getTipo().equals("malo4")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                        Bitmap b3 = Bitmap.createScaledBitmap(malo4, h2, l2, false);
-                        canvas.drawBitmap(b3, x, y, null);
-                    } else if (escenario.celdas[j][i].getTipo().equals("pared_bibliodrch")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBLatDrch, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                    } else if (escenario.celdas[j][i].getTipo().equals("pared_biblioizq")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBLatIzq, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                    } else if (escenario.celdas[j][i].getTipo().equals("murobiblioizqarrb")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBIzqArrb, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                    } else if (escenario.celdas[j][i].getTipo().equals("murobiblioizq")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBIzq, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                    } else if (escenario.celdas[j][i].getTipo().equals("murobibliodrch")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBDrch, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                    } else if (escenario.celdas[j][i].getTipo().equals("murobibliodrcharrb")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bMuroBDrchArrb, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                    }else if (escenario.celdas[j][i].getTipo().equals("estanteria")) {
+                //para escenario 2
+                else if (escenario.celdas[j][i].getTipo().equals("suelob")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("malo1")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo1, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("pared_biblioarrb")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroBArrb, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("pared_biblio")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroBiblio, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("malo4")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo4, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("pared_bibliodrch")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroBLatDrch, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("pared_biblioizq")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroBLatIzq, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("murobiblioizqarrb")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroBIzqArrb, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("murobiblioizq")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroBIzq, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("murobibliodrch")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroBDrch, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("murobibliodrcharrb")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroBDrchArrb, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("estanteria")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bEstanteria, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("sofa")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("sofa")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSofa, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("estanteria_lado")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("estanteria_lado")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bEstanteriaLateralDrch, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("estanteria_atras")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("estanteria_atras")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bEstanteriaAtras, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_arriba_derecha")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("mostrador_arriba_derecha")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMostradorDrchArrb, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_arriba_izquierda")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("mostrador_arriba_izquierda")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMostradorEsqIzqArrb, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_centro")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("mostrador_centro")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMostrador, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_esquina_derecha")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("mostrador_esquina_derecha")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMostradorDrchAbj, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_esquina_izquierda")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("mostrador_esquina_izquierda")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMostradorEsqIzqAbj, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_lateral")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("mostrador_lateral")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMostradorLateral, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                 }
-                    //para escenario 3
+                //para escenario 3
                 else if (escenario.celdas[j][i].getTipo().equals("muroclaseesq1")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMuroCEsq1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("muroclaseesq2")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("muroclaseesq2")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMuroCEsq2, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("muroclaseesq3")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("muroclaseesq3")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMuroCEsq3, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("muroclaseesq4")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("muroclaseesq4")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMuroCEsq4, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral1")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral1")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMuroCL1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral2")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral2")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMuroCL2, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral3")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral3")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMuroCL3, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral4")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral4")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMuroCL4, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("mesa_silla")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("mesa_silla")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bMesaC, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("pizarra1")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("pizarra1")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bPiz1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("pizarra2")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("pizarra2")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bPiz2, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("pizarra3")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("pizarra3")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bPiz3, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("silla_1")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("silla_1")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSilla, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("estanteria_arriba")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("estanteria_arriba")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bEstant, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("retroceso_biblio_arriba")) {
-                    Bitmap b2 = Bitmap.createScaledBitmap(bPuertaBiblioArrb_volver, h2, l2, false);
+                } else if (escenario.celdas[j][i].getTipo().equals("retroceso_biblio")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bPuertaBiblioVolver, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }else if (escenario.celdas[j][i].getTipo().equals("puerta_biblio_derecha")) {
+                } else if (escenario.celdas[j][i].getTipo().equals("puerta_biblio_derecha")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bPuertaBiblioDrch, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
+                } else if (escenario.celdas[j][i].getTipo().equals("retroceso_clase")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bPuertaAulaVolver, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("puerta_aula_derecha")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bPuertaAula, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
                 }
+
                     // System.out.println("");
                 }
             }
 
-        }
+
+    }
     protected void dibujarInstrucciones(Canvas canvas){
 
         Bitmap b2 = Bitmap.createScaledBitmap(instrucciones,getWidth(), getHeight(), false);
