@@ -132,18 +132,14 @@ public class Sprite {
                 posx = posx-1;
                 else{
                     if (esc.celdas[posx-1][(posy)].getTipo().contains("malo")==true) {
-                        //esc.celdas[posx-1][(posy)].getTipo().equals("malo1")
-
                         int o = 1;
                         gameView.startActProva((esc.celdas[posx - 1][(posy)].getTipo()));
-                }
+                    }
                     else if(esc.celdas[posx -1][(posy)].getTipo().contains("puerta")==true){
                         gameView.setEscenario();
-
                     }
                     else if(esc.celdas[posx -1][(posy)].getTipo().contains("retroceso")==true){
                         gameView.setEscenarioMenor();
-
                     }
                     speed = 0;
 

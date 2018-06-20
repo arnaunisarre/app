@@ -13,7 +13,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.arnau.loggindemo.Clases.Escenario;
-import com.example.arnau.loggindemo.Clases.Objeto;
 import com.example.arnau.loggindemo.Clases.Usuario;
 import com.example.arnau.loggindemo.R;
 
@@ -27,12 +26,15 @@ public class GameView  extends SurfaceView  {
 
     private Bitmap bHierba, bAgua,bHierba2,bHierba3,bMuro1,bSuelo1,bMuro2;
     private Bitmap bSueloBiblio, bEstanteria, bMuroBiblio, bPuertaBiblioAbj, bPuertaBiblioArrb;
-    private Bitmap bPuertaBiblioDrch, bSueloAula, bMuroAula;
-    private Bitmap bEstanteriaAtras, bEstanteriaLateralDrch,bEstanteriaLateralIzq;
+    private Bitmap bPuertaBiblioDrch, bSueloAula, bPuertaBiblioArrb_volver;
+    private Bitmap bEstanteriaAtras, bEstanteriaLateralDrch, bSofa;
     private Bitmap bMostradorLateral, bMostrador, bMostradorEsqIzqAbj, bMostradorEsqIzqArrb;
     private Bitmap bMostradorDrchArrb, bMostradorDrchAbj;
     private Bitmap bMuroBIzq, bMuroBDrch, bMuroBIzqArrb, bMuroBDrchArrb;
     private Bitmap bMuroBArrb, bMuroBLatIzq, bMuroBLatDrch;
+    private Bitmap bMuroCEsq1, bMuroCEsq2, bMuroCEsq3, bMuroCEsq4;
+    private Bitmap bMuroCL1, bMuroCL2, bMuroCL3, bMuroCL4, bMesaC;
+    private Bitmap bPiz1, bPiz2, bPiz3, bSilla, bEstant;
     private Bitmap personaje;
     private Bitmap malo1,malo2,malo3,malo4,malo5,malo6,malo7,malo8,malo9,malo10;
     private Bitmap botonDerecha, botonIzquierda, botonArriba, botonAbajo;
@@ -108,14 +110,29 @@ public class GameView  extends SurfaceView  {
         bMuroBDrch = BitmapFactory.decodeResource(getResources(),R.drawable.murobibliodrch);
         bMuroBDrchArrb = BitmapFactory.decodeResource(getResources(),R.drawable.murobibliodrcharrb);
         bMuroBArrb= BitmapFactory.decodeResource(getResources(),R.drawable.pared_biblioarrb);
-        bMuroBLatDrch= BitmapFactory.decodeResource(getResources(),R.drawable.pared_bibliodrch);
-        bMuroBLatIzq= BitmapFactory.decodeResource(getResources(),R.drawable.pared_biblioizq);
+        bMuroBLatDrch= BitmapFactory.decodeResource(getResources(),R.drawable.pared_biblio_drch);
+        bMuroBLatIzq= BitmapFactory.decodeResource(getResources(),R.drawable.pared_biblio_izq);
+        bMuroCEsq1 = BitmapFactory.decodeResource(getResources(),R.drawable.muroclaseesq1);
+        bMuroCEsq2 = BitmapFactory.decodeResource(getResources(),R.drawable.muroclaseesq2);
+        bMuroCEsq3 = BitmapFactory.decodeResource(getResources(),R.drawable.muroclaseesq3);
+        bMuroCEsq4 = BitmapFactory.decodeResource(getResources(),R.drawable.muroclaseesq4);
+        bMuroCL1 = BitmapFactory.decodeResource(getResources(),R.drawable.muroclaselateral1);
+        bMuroCL2 = BitmapFactory.decodeResource(getResources(),R.drawable.muroclaselateral2);
+        bMuroCL3 = BitmapFactory.decodeResource(getResources(),R.drawable.muroclaselateral3);
+        bMuroCL4 = BitmapFactory.decodeResource(getResources(),R.drawable.muroclaselateral4);
+        bMesaC = BitmapFactory.decodeResource(getResources(),R.drawable.mesa_silla);
+        bPiz1 = BitmapFactory.decodeResource(getResources(),R.drawable.pizarra1);
+        bPiz2 = BitmapFactory.decodeResource(getResources(),R.drawable.pizarra2);
+        bPiz3 = BitmapFactory.decodeResource(getResources(),R.drawable.pizarra3);
+        bSilla = BitmapFactory.decodeResource(getResources(),R.drawable.silla_1);
+        bEstant = BitmapFactory.decodeResource(getResources(),R.drawable.estanteria_arriba);
 
         //añadir muro aula bMuroAula = BitmapFactory.decodeResource(getResources(), R.drawable.)
         //bitmaps de Puertas
         bPuertaBiblioAbj = BitmapFactory.decodeResource(getResources(),R.drawable.puerta_biblio_abajo);
         bPuertaBiblioArrb= BitmapFactory.decodeResource(getResources(),R.drawable.puerta_biblio_arriba);
         bPuertaBiblioDrch = BitmapFactory.decodeResource(getResources(),R.drawable.puerta_biblio_derecha);
+        bPuertaBiblioArrb_volver= BitmapFactory.decodeResource(getResources(),R.drawable.puerta_biblio_arriba_volver);
         //Bitmaps mobiliario biblio
 
         bEstanteriaAtras = BitmapFactory.decodeResource(getResources(),R.drawable.estanteria_atras);
@@ -126,6 +143,8 @@ public class GameView  extends SurfaceView  {
         bMostradorEsqIzqArrb= BitmapFactory.decodeResource(getResources(),R.drawable.mostrador_arriba_izquierda);
         bMostradorDrchArrb= BitmapFactory.decodeResource(getResources(),R.drawable.mostrador_arriba_derecha);
         bMostradorDrchAbj= BitmapFactory.decodeResource(getResources(),R.drawable.mostrador_esquina_derecha);
+        bSofa = BitmapFactory.decodeResource(getResources(),R.drawable.sofa);
+
 
 
         instrucciones = BitmapFactory.decodeResource(getResources(), R.drawable.fons);
@@ -153,46 +172,123 @@ public class GameView  extends SurfaceView  {
             esc1.celdas[p][esc1.getNumVerticales()-1].setTipo("y");
             esc1.celdas[p][esc1.getNumVerticales()-1].setFalsePuedopasar();
         }
-        //ESCENARIO2 con celdas tipo Z para muros
-        for(int p=0;p<esc2.getNumVerticales();p++) {
-            esc2.celdas[0][p].setTipo("z");
-            esc2.celdas[0][p].setFalsePuedopasar();
+
+//        //ESCENARIO2 con celdas tipo Z para muros
+//        for(int p=0;p<esc2.getNumVerticales();p++) {
+//            esc2.celdas[0][p].setTipo("z");
+//            esc2.celdas[0][p].setFalsePuedopasar();
+//        }
+//        for(int p=0;p<esc2.getNumVerticales();p++) {
+//            esc2.celdas[esc2.getNumHorizontales()-1][p].setTipo("z");
+//            esc2.celdas[esc2.getNumHorizontales()-1][p].setFalsePuedopasar();
+//        }
+//        for(int p=0;p<esc2.getNumHorizontales();p++) {
+//            esc2.celdas[p][0].setTipo("z");
+//            esc2.celdas[p][0].setFalsePuedopasar();
+//        }
+//        for(int p=0;p<esc2.getNumHorizontales();p++) {
+//            esc2.celdas[p][esc2.getNumVerticales()-1].setTipo("z");
+//            esc2.celdas[p][esc2.getNumVerticales()-1].setFalsePuedopasar();
+//        }
+        for( int i = 0; i < 21; i++) {
+            if( (i<6) || ((i>9) &&(i<15)) ){
+                esc2.celdas[i][1].setTipo("estanteria");
+                esc2.celdas[i][1].setFalsePuedopasar();
+                esc2.celdas[i][4].setTipo("estanteria_atras");
+                esc2.celdas[i][4].setFalsePuedopasar();
+                esc2.celdas[i][7].setTipo("estanteria");
+                esc2.celdas[i][7].setFalsePuedopasar();
+                esc2.celdas[i][9].setTipo("estanteria");
+                esc2.celdas[i][9].setFalsePuedopasar();
+            }
+            }
+        esc2.celdas[10][3].setTipo("estanteria_atras");
+        esc2.celdas[11][3].setTipo("estanteria_atras");
+        esc2.celdas[12][3].setTipo("estanteria_atras");
+        esc2.celdas[13][3].setTipo("estanteria_atras");
+        esc2.celdas[14][3].setTipo("estanteria_atras");
+        esc2.celdas[11][1].setTipo("suelob");
+        esc2.celdas[10][4].setTipo("x");
+        esc2.celdas[11][4].setTipo("x");
+        esc2.celdas[12][4].setTipo("x");
+        esc2.celdas[13][4].setTipo("x");
+        esc2.celdas[14][4].setTipo("x");
+        esc2.celdas[13][1].setTipo("estanteria");
+        esc2.celdas[13][1].setFalsePuedopasar();
+        esc2.celdas[14][1].setTipo("estanteria");
+        esc2.celdas[14][1].setFalsePuedopasar();
+        esc2.celdas[1][4].setTipo("estanteria_atras");
+        esc2.celdas[1][4].setFalsePuedopasar();
+        esc2.celdas[2][4].setTipo("estanteria_atras");
+        esc2.celdas[2][4].setFalsePuedopasar();
+        esc2.celdas[3][4].setTipo("estanteria_atras");
+        esc2.celdas[3][4].setFalsePuedopasar();
+        esc2.celdas[4][4].setTipo("estanteria_atras");
+        esc2.celdas[4][4].setFalsePuedopasar();
+        esc2.celdas[5][4].setTipo("estanteria_atras");
+        esc2.celdas[5][4].setFalsePuedopasar();
+        esc2.celdas[2][7].setTipo("estanteria");
+        esc2.celdas[3][7].setFalsePuedopasar();
+        esc2.celdas[4][7].setTipo("estanteria");
+        esc2.celdas[4][7].setFalsePuedopasar();
+        esc2.celdas[5][7].setTipo("estanteria");
+        esc2.celdas[5][7].setFalsePuedopasar();
+        for ( int j = 0; j < 10; j++) {
+            if( (j<9)){
+                esc2.celdas[1][j].setTipo("estanteria_lado");
+                esc2.celdas[1][j].setFalsePuedopasar();
+                esc2.celdas[7][j].setTipo("estanteria_lado");
+                esc2.celdas[7][j].setFalsePuedopasar();
+                esc2.celdas[8][j].setTipo("estanteria_lado");
+                esc2.celdas[8][j].setFalsePuedopasar();
+                esc2.celdas[16][j].setTipo("estanteria_lado");
+                esc2.celdas[16][j].setFalsePuedopasar();
+            }
         }
-        for(int p=0;p<esc2.getNumVerticales();p++) {
-            esc2.celdas[esc2.getNumHorizontales()-1][p].setTipo("z");
-            esc2.celdas[esc2.getNumHorizontales()-1][p].setFalsePuedopasar();
-        }
-        for(int p=0;p<esc2.getNumHorizontales();p++) {
-            esc2.celdas[p][0].setTipo("z");
-            esc2.celdas[p][0].setFalsePuedopasar();
-        }
-        for(int p=0;p<esc2.getNumHorizontales();p++) {
-            esc2.celdas[p][esc2.getNumVerticales()-1].setTipo("z");
-            esc2.celdas[p][esc2.getNumVerticales()-1].setFalsePuedopasar();
-        }
+        esc2.celdas[10][5].setTipo("mostrador_arriba_izquierda");
+        esc2.celdas[10][5].setFalsePuedopasar();
+        esc2.celdas[10][6].setTipo("mostrador_lateral");
+        esc2.celdas[10][6].setFalsePuedopasar();
+        esc2.celdas[14][6].setTipo("mostrador_lateral");
+        esc2.celdas[14][6].setFalsePuedopasar();
+        esc2.celdas[11][5].setTipo("mostrador_centro");
+        esc2.celdas[11][5].setFalsePuedopasar();
+        esc2.celdas[12][5].setTipo("mostrador_centro");
+        esc2.celdas[12][5].setFalsePuedopasar();
+        esc2.celdas[13][5].setTipo("mostrador_centro");
+        esc2.celdas[13][5].setFalsePuedopasar();
+        esc2.celdas[11][7].setTipo("mostrador_centro");
+        esc2.celdas[11][7].setFalsePuedopasar();
+        esc2.celdas[12][7].setTipo("mostrador_centro");
+        esc2.celdas[12][7].setFalsePuedopasar();
+        esc2.celdas[13][7].setTipo("mostrador_centro");
+        esc2.celdas[13][7].setFalsePuedopasar();
+        esc2.celdas[10][7].setTipo("mostrador_esquina_izquierda");
+        esc2.celdas[10][7].setFalsePuedopasar();
+        esc2.celdas[14][5].setTipo("mostrador_arriba_derecha");
+        esc2.celdas[14][5].setFalsePuedopasar();
+        esc2.celdas[14][7].setTipo("mostrador_esquina_derecha");
+        esc2.celdas[14][7].setFalsePuedopasar();
         //        //ESCENARIO3 con celdas tipo W para muros
 
         esc2.celdas[9][1].setTipo("malo1");
         esc2.celdas[9][1].setFalsePuedopasar();
-        esc2.celdas[1][6].setTipo("malo9");
-        esc2.celdas[1][6].setFalsePuedopasar();
+        esc2.celdas[2][6].setTipo("malo9");
+        esc2.celdas[2][6].setFalsePuedopasar();
         esc2.celdas[7][10].setTipo("malo4");
         esc2.celdas[7][10].setFalsePuedopasar();
-
         esc1.celdas[5][2].setTipo("malo2");
         esc1.celdas[5][2].setFalsePuedopasar();
-        esc1.celdas[4][5].setTipo("malo3");
-        esc1.celdas[4][5].setFalsePuedopasar();
-        esc1.celdas[15][4].setTipo("malo5");
-        esc1.celdas[15][4].setFalsePuedopasar();
+        esc3.celdas[4][5].setTipo("malo3");
+        esc3.celdas[4][5].setFalsePuedopasar();
+        esc3.celdas[15][4].setTipo("malo5");
+        esc3.celdas[15][4].setFalsePuedopasar();
         esc1.celdas[20][1].setTipo("malo6");
         esc1.celdas[20][1].setFalsePuedopasar();
-        esc1.celdas[17][9].setTipo("malo7");
-        esc1.celdas[17][9].setFalsePuedopasar();
+        esc3.celdas[17][9].setTipo("malo7");
+        esc3.celdas[17][9].setFalsePuedopasar();
         esc1.celdas[3][7].setTipo("malo8");
         esc1.celdas[3][7].setFalsePuedopasar();
-        esc1.celdas[1][6].setTipo("malo9");
-        esc1.celdas[1][6].setFalsePuedopasar();
 
         //mobiliario de la biblioteca ESC2
         // columna/fila
@@ -231,12 +327,148 @@ public class GameView  extends SurfaceView  {
         esc2.celdas[15][0].setFalsePuedopasar();
         esc2.celdas[11][0].setTipo("retroceso_biblio_arriba");
         esc2.celdas[11][0].setFalsePuedopasar();
-
         esc1.celdas[11][0].setTipo("puerta_biblio_arriba");
         esc1.celdas[11][0].setFalsePuedopasar();
+        for( int j = 0; j < 10; j++){
+            if (j > 1){
+                esc2.celdas[20][j].setTipo("sofa");
+                esc2.celdas[20][j].setFalsePuedopasar();
+            }
+        }
 
-        //        bMuroBDrch = BitmapFactory.decodeResource(getResources(),R.drawable.muroBibliodrch);
-        //mobiliario de la clase
+
+        //mobiliario de la aula ESC3
+        // columna/fila
+        //parte superior
+        for( int i = 0; i < 21; i++){
+            esc3.celdas[i][0].setTipo("muroclaselateral2");
+            esc3.celdas[i][0].setFalsePuedopasar();
+        }
+        //parte inferior
+        for( int i = 0; i < 21; i++) {
+            esc3.celdas[i][11].setTipo("muroclaselateral4");
+            esc3.celdas[i][11].setFalsePuedopasar();
+        }
+
+        //laterales biblioteca derecha
+        for( int j = 0; j < 11; j++) {
+            esc3.celdas[21][j].setTipo("muroclaselateral3");
+            esc3.celdas[21][j].setFalsePuedopasar();
+        }
+
+        //laterales biblioteca izquierda
+        for( int j = 0; j < 11; j++) {
+            esc3.celdas[0][j].setTipo("muroclaselateral1");
+            esc3.celdas[0][j].setFalsePuedopasar();
+        }
+        //esquinas aula
+        esc3.celdas[0][0].setTipo("muroclaseesq1");
+        esc3.celdas[0][0].setFalsePuedopasar();
+        esc3.celdas[0][11].setTipo("muroclaseesq4");
+        esc3.celdas[0][11].setFalsePuedopasar();
+        esc3.celdas[21][11].setTipo("muroclaseesq3");
+        esc3.celdas[21][11].setFalsePuedopasar();
+        esc3.celdas[21][0].setTipo("muroclaseesq2");
+        esc3.celdas[21][0].setFalsePuedopasar();
+        esc3.celdas[21][6].setTipo("puerta_biblio_derecha");
+        esc3.celdas[21][6].setFalsePuedopasar();
+        esc3.celdas[15][0].setTipo("retroceso_biblio_arriba");
+        esc3.celdas[15][0].setFalsePuedopasar();
+        //mesa y silla
+        esc3.celdas[5][3].setTipo("mesa_silla");
+        esc3.celdas[5][3].setFalsePuedopasar();
+        esc3.celdas[7][3].setTipo("mesa_silla");
+        esc3.celdas[7][3].setFalsePuedopasar();
+        esc3.celdas[9][3].setTipo("mesa_silla");
+        esc3.celdas[9][3].setFalsePuedopasar();
+        esc3.celdas[11][3].setTipo("mesa_silla");
+        esc3.celdas[11][3].setFalsePuedopasar();
+        esc3.celdas[13][3].setTipo("mesa_silla");
+        esc3.celdas[13][3].setFalsePuedopasar();
+        esc3.celdas[15][3].setTipo("mesa_silla");
+        esc3.celdas[15][3].setFalsePuedopasar();
+        esc3.celdas[17][3].setTipo("mesa_silla");
+        esc3.celdas[17][3].setFalsePuedopasar();
+        esc3.celdas[3][5].setTipo("mesa_silla");
+        esc3.celdas[3][5].setFalsePuedopasar();
+        esc3.celdas[5][5].setTipo("mesa_silla");
+        esc3.celdas[5][5].setFalsePuedopasar();
+        esc3.celdas[7][5].setTipo("mesa_silla");
+        esc3.celdas[7][5].setFalsePuedopasar();
+        esc3.celdas[9][5].setTipo("mesa_silla");
+        esc3.celdas[9][5].setFalsePuedopasar();
+        esc3.celdas[11][5].setTipo("mesa_silla");
+        esc3.celdas[11][5].setFalsePuedopasar();
+        esc3.celdas[13][5].setTipo("mesa_silla");
+        esc3.celdas[13][5].setFalsePuedopasar();
+        esc3.celdas[15][5].setTipo("mesa_silla");
+        esc3.celdas[15][5].setFalsePuedopasar();
+        esc3.celdas[17][5].setTipo("mesa_silla");
+        esc3.celdas[17][5].setFalsePuedopasar();
+        esc3.celdas[3][7].setTipo("mesa_silla");
+        esc3.celdas[3][7].setFalsePuedopasar();
+        esc3.celdas[5][7].setTipo("mesa_silla");
+        esc3.celdas[5][7].setFalsePuedopasar();
+        esc3.celdas[7][7].setTipo("mesa_silla");
+        esc3.celdas[7][7].setFalsePuedopasar();
+        esc3.celdas[9][7].setTipo("mesa_silla");
+        esc3.celdas[9][7].setFalsePuedopasar();
+        esc3.celdas[11][7].setTipo("mesa_silla");
+        esc3.celdas[11][7].setFalsePuedopasar();
+        esc3.celdas[13][7].setTipo("mesa_silla");
+        esc3.celdas[13][7].setFalsePuedopasar();
+        esc3.celdas[15][7].setTipo("mesa_silla");
+        esc3.celdas[15][7].setFalsePuedopasar();
+        esc3.celdas[17][7].setTipo("mesa_silla");
+        esc3.celdas[17][7].setFalsePuedopasar();
+        esc3.celdas[3][9].setTipo("mesa_silla");
+        esc3.celdas[3][9].setFalsePuedopasar();
+        esc3.celdas[5][9].setTipo("mesa_silla");
+        esc3.celdas[5][9].setFalsePuedopasar();
+        esc3.celdas[7][9].setTipo("mesa_silla");
+        esc3.celdas[7][9].setFalsePuedopasar();
+        esc3.celdas[9][9].setTipo("mesa_silla");
+        esc3.celdas[9][9].setFalsePuedopasar();
+        esc3.celdas[11][9].setTipo("mesa_silla");
+        esc3.celdas[11][9].setFalsePuedopasar();
+        esc3.celdas[13][9].setTipo("mesa_silla");
+        esc3.celdas[13][9].setFalsePuedopasar();
+        esc3.celdas[15][9].setTipo("mesa_silla");
+        esc3.celdas[15][9].setFalsePuedopasar();
+        esc3.celdas[17][9].setTipo("mesa_silla");
+        esc3.celdas[17][9].setFalsePuedopasar();
+
+        //pizarra
+        esc3.celdas[8][0].setTipo("pizarra1");
+        esc3.celdas[8][0].setFalsePuedopasar();
+        esc3.celdas[9][0].setTipo("pizarra2");
+        esc3.celdas[9][0].setFalsePuedopasar();
+        esc3.celdas[10][0].setTipo("pizarra3");
+        esc3.celdas[10][0].setFalsePuedopasar();
+        //sillas
+        esc3.celdas[9][10].setTipo("silla_1");
+        esc3.celdas[9][10].setFalsePuedopasar();
+        esc3.celdas[20][10].setTipo("silla_1");
+        esc3.celdas[20][10].setFalsePuedopasar();
+        esc3.celdas[17][10].setTipo("silla_1");
+        esc3.celdas[17][10].setFalsePuedopasar();
+        //estanteria
+        esc3.celdas[2][1].setTipo("estanteria_arriba");
+        esc3.celdas[2][1].setFalsePuedopasar();
+        esc3.celdas[5][1].setTipo("estanteria_arriba");
+        esc3.celdas[5][1].setFalsePuedopasar();
+        esc3.celdas[6][1].setTipo("estanteria_arriba");
+        esc3.celdas[6][1].setFalsePuedopasar();
+        esc3.celdas[3][1].setTipo("estanteria_arriba");
+        esc3.celdas[3][1].setFalsePuedopasar();
+        esc3.celdas[13][1].setTipo("estanteria_arriba");
+        esc3.celdas[13][1].setFalsePuedopasar();
+        esc3.celdas[14][1].setTipo("estanteria_arriba");
+        esc3.celdas[14][1].setFalsePuedopasar();
+        esc3.celdas[16][1].setTipo("estanteria_arriba");
+        esc3.celdas[16][1].setFalsePuedopasar();
+        esc3.celdas[17][1].setTipo("estanteria_arriba");
+        esc3.celdas[17][1].setFalsePuedopasar();
 
 
         personaje = BitmapFactory.decodeResource(getResources(), R.drawable.bad5);
@@ -251,7 +483,6 @@ public class GameView  extends SurfaceView  {
         malo7 = BitmapFactory.decodeResource(getResources(), R.drawable.malo7);
         malo8 = BitmapFactory.decodeResource(getResources(), R.drawable.malo8);
         malo9 = BitmapFactory.decodeResource(getResources(), R.drawable.malo9);
-        malo10 = BitmapFactory.decodeResource(getResources(), R.drawable.malo10);
 
     }
 
@@ -319,54 +550,46 @@ public class GameView  extends SurfaceView  {
                 }else if (escenario.celdas[j][i].getTipo().equals("x")&&escenario.equals(esc2)) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                }
-                else if (escenario.celdas[j][i].getTipo().equals("malo1")) {
-                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                }else if (escenario.celdas[j][i].getTipo().equals("x")&&escenario.equals(esc3)) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSueloAula, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
-                    Bitmap b3 = Bitmap.createScaledBitmap(malo1, h2, l2, false);
-                    canvas.drawBitmap(b3, x, y, null);
-                } else if (escenario.celdas[j][i].getTipo().equals("malo2")) {
-                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
-                    canvas.drawBitmap(b2, x, y, null);
-                    Bitmap b3 = Bitmap.createScaledBitmap(malo2, h2, l2, false);
-                    canvas.drawBitmap(b3, x, y, null);
-                } else if (escenario.celdas[j][i].getTipo().equals("malo3")) {
-                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                }else if (escenario.celdas[j][i].getTipo().equals("malo2")) {
+                        Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                        canvas.drawBitmap(b2, x, y, null);
+                        Bitmap b3 = Bitmap.createScaledBitmap(malo2, h2, l2, false);
+                        canvas.drawBitmap(b3, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("malo3")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSueloAula, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo3, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                } else if (escenario.celdas[j][i].getTipo().equals("malo4")) {
-                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
-                    canvas.drawBitmap(b2, x, y, null);
-                    Bitmap b3 = Bitmap.createScaledBitmap(malo4, h2, l2, false);
-                    canvas.drawBitmap(b3, x, y, null);
-                } else if (escenario.celdas[j][i].getTipo().equals("malo5")) {
-                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                }else if (escenario.celdas[j][i].getTipo().equals("malo5")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSueloAula, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo5, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("malo7")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSueloAula, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo7, h2, l2, false);
+                    canvas.drawBitmap(b3, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("malo8")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                    Bitmap b3 = Bitmap.createScaledBitmap(malo8, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
                 } else if (escenario.celdas[j][i].getTipo().equals("malo6")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo6, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
-                } else if (escenario.celdas[j][i].getTipo().equals("malo7")) {
-                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
-                    canvas.drawBitmap(b2, x, y, null);
-                    Bitmap b3 = Bitmap.createScaledBitmap(malo7, h2, l2, false);
-                    canvas.drawBitmap(b3, x, y, null);
-                } else if (escenario.celdas[j][i].getTipo().equals("malo8")) {
-                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
-                    canvas.drawBitmap(b2, x, y, null);
-                    Bitmap b3 = Bitmap.createScaledBitmap(malo8, h2, l2, false);
-                    canvas.drawBitmap(b3, x, y, null);
-                } else if (escenario.celdas[j][i].getTipo().equals("malo9")) {
-                    Bitmap b2 = Bitmap.createScaledBitmap(bSuelo1, h2, l2, false);
+                }else if (escenario.celdas[j][i].getTipo().equals("malo9")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                     Bitmap b3 = Bitmap.createScaledBitmap(malo9, h2, l2, false);
                     canvas.drawBitmap(b3, x, y, null);
                 } else if (escenario.celdas[j][i].getTipo().equals("y")) {
-                    Bitmap b2 = Bitmap.createScaledBitmap(bMuro1, h2, l2, false);
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuro2, h2, l2, false);
                     canvas.drawBitmap(b2, x, y, null);
                 } else if (escenario.celdas[j][i].getTipo().equals("puerta_biblio_arriba")) {
                     Bitmap b2 = Bitmap.createScaledBitmap(bPuertaBiblioArrb, h2, l2, false);
@@ -410,13 +633,84 @@ public class GameView  extends SurfaceView  {
                     } else if (escenario.celdas[j][i].getTipo().equals("murobibliodrcharrb")) {
                         Bitmap b2 = Bitmap.createScaledBitmap(bMuroBDrchArrb, h2, l2, false);
                         canvas.drawBitmap(b2, x, y, null);
-                    } else if (escenario.celdas[j][i].getTipo().equals("malo10")) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(bSueloBiblio, h2, l2, false);
-                        canvas.drawBitmap(b2, x, y, null);
-                        Bitmap b3 = Bitmap.createScaledBitmap(malo10, h2, l2, false);
-                        canvas.drawBitmap(b3, x, y, null);
-                    }
+                    }else if (escenario.celdas[j][i].getTipo().equals("estanteria")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bEstanteria, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("sofa")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSofa, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("estanteria_lado")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bEstanteriaLateralDrch, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("estanteria_atras")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bEstanteriaAtras, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_arriba_derecha")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMostradorDrchArrb, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_arriba_izquierda")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMostradorEsqIzqArrb, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_centro")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMostrador, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_esquina_derecha")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMostradorDrchAbj, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_esquina_izquierda")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMostradorEsqIzqAbj, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("mostrador_lateral")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMostradorLateral, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }
                     //para escenario 3
+                else if (escenario.celdas[j][i].getTipo().equals("muroclaseesq1")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroCEsq1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("muroclaseesq2")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroCEsq2, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("muroclaseesq3")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroCEsq3, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("muroclaseesq4")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroCEsq4, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral1")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroCL1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral2")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroCL2, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral3")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroCL3, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("muroclaselateral4")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMuroCL4, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("mesa_silla")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bMesaC, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("pizarra1")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bPiz1, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("pizarra2")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bPiz2, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("pizarra3")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bPiz3, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("silla_1")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bSilla, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("estanteria_arriba")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bEstant, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }else if (escenario.celdas[j][i].getTipo().equals("retroceso_biblio_arriba")) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(bPuertaBiblioArrb_volver, h2, l2, false);
+                    canvas.drawBitmap(b2, x, y, null);
+                }
                     // System.out.println("");
                 }
             }
@@ -441,8 +735,6 @@ public class GameView  extends SurfaceView  {
         int b2 = b+96;
         h = h-300;
         int h2 = h+96;
-        //h2 = 20000;
-        //h =20000;
         Rect buttonEsquerra = new Rect(100,h,196,h2);
         Rect buttonDalt = new Rect(250,a,346,a2);
         Rect buttonBaix = new Rect(250,b,346,b2);
@@ -453,23 +745,6 @@ public class GameView  extends SurfaceView  {
        float p= event.getX();
         float l = event.getY();
         if(event.getAction()==MotionEvent.ACTION_DOWN) {
-//            if (buttonDreta.contains((int) event.getX(), (int) event.getY())) {
-//                buttonClicked = true;
-//                sprite.setDirection(3);
-//                Log.d("pos", "derecha");
-//            } else if (buttonEsquerra.contains((int) event.getX(), (int) event.getY())) {
-//                sprite.setDirection(1);
-//                Log.d("pos", "izquierda");
-//            } else if (buttonDalt.contains((int) event.getX(), (int) event.getY())) {
-//                sprite.setDirection(0);
-//                Log.d("pos", "adalt");
-//            } else if (buttonBaix.contains((int) event.getX(), (int) event.getY())) {
-//                sprite.setDirection(2);
-//                Log.d("pos", "baix");
-//            } else {
-//
-//                Log.d("pos", "nada");
-//            }
         }
         //he cambiado a esc2
         if(event.getAction()==MotionEvent.ACTION_UP){

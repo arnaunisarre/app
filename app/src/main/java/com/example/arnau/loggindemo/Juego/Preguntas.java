@@ -17,8 +17,6 @@ import com.example.arnau.loggindemo.Clases.Objeto;
 import com.example.arnau.loggindemo.Clases.Usuario;
 import com.example.arnau.loggindemo.R;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,12 +66,12 @@ public class Preguntas extends AppCompatActivity {
 
         if (malo.equals("malo1")){
 
-            Pregunta.setText("Aquesta es la pregunta del dolent1");
-            DerechaArriba.setText("andres");
-            DerechaAbajo.setText("anna");
-            IzquierdaArriba.setText("liz");
-            IzquierdaAbajo.setText("arnau");
-            respuestaCorrecta = "arnau";
+            Pregunta.setText("El protocolo wifi se conoce como:");
+            DerechaArriba.setText("IEEE 801.11");
+            DerechaAbajo.setText("IEEE 802.10");
+            IzquierdaArriba.setText("IEEE 801.10");
+            IzquierdaAbajo.setText("IEEE 802.11");
+            respuestaCorrecta = "IEEE 802.11";
             fotoMalo.setImageResource(R.drawable.malo1);
             Objeto m = new Objeto(jugador.getIdUsuario(),"calculadora","drawable/calculadora.png","permite hacer cálculos");
             setObjeto(m);
@@ -88,7 +86,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("Ninguna de las anteriores");
             respuestaCorrecta = "Relación señal-ruido";
             fotoMalo.setImageResource(R.drawable.malo2);
-            Objeto m = new Objeto(jugador.getIdUsuario(),"carpeta","drawable/carpeta.png","Puedes guaradr apuntes en ella");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"carpeta","drawable/carpeta.png","Puedes guardar apuntes en ella");
             setObjeto(m);
             Toast.makeText(Preguntas.this, "id usuario "+jugador.getNombre(), Toast.LENGTH_LONG).show();
 
@@ -129,7 +127,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("No utiliza ancho de banda");
             respuestaCorrecta = "Utiliza el doble del ancho de banda";
             fotoMalo.setImageResource(R.drawable.malo5);
-            Objeto m = new Objeto(jugador.getIdUsuario(),"hoja_de_papel","drawable/hoja_papel.png","puedes apuntar cosa y dibujar en ella");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"hoja_de_papel","drawable/hoja_papel.png","puedes apuntar cosas y dibujar en ella");
             setObjeto(m);
 
         }
@@ -181,7 +179,7 @@ public class Preguntas extends AppCompatActivity {
             IzquierdaAbajo.setText("Ninguna de las anteriores");
             respuestaCorrecta = "Suprime una banda";
             fotoMalo.setImageResource(R.drawable.malo9);
-            Objeto m = new Objeto(jugador.getIdUsuario(),"libro","drawable/libro.png","imagen");
+            Objeto m = new Objeto(jugador.getIdUsuario(),"libro","drawable/libro.png","contiene valiosa información");
             setObjeto(m);
 
         }
@@ -226,9 +224,6 @@ public class Preguntas extends AppCompatActivity {
 
         if (respuestaCorrecta.equals(respuestaUsuario)){
             Log.d("nombreobjeto", objeto.getNombreObjeto());
-
-
-
             int a = añadirObjeto(objeto);
             if (a == 1){
                 Log.d("s","s'ha afegit");
@@ -239,10 +234,6 @@ public class Preguntas extends AppCompatActivity {
             }
 
             onBackPressed();
-
-        }
-        else{
-
 
         }
     }
@@ -270,17 +261,12 @@ public class Preguntas extends AppCompatActivity {
                 } else {
                     Toast.makeText(Preguntas.this, "L'objecte no existia", Toast.LENGTH_LONG).show();
                     existe = false;
-
                 }
-
-
-
             }
 
             @Override
             public void onFailure(Call<Objeto> call, Throwable t) {
                 existe = true;
-
             }
 
         });
@@ -294,7 +280,6 @@ public class Preguntas extends AppCompatActivity {
 
                     if (response.isSuccessful()) {
 
-
                         Toast.makeText(Preguntas.this, "L'objectes'ha afegit", Toast.LENGTH_LONG).show();
 
                     }else if (response.code() == 409){
@@ -303,30 +288,20 @@ public class Preguntas extends AppCompatActivity {
                     else {
                         Toast.makeText(Preguntas.this, "No s'ha pogut afegir l'objecte", Toast.LENGTH_LONG).show();
 
-
                     }
-
-
-
                 }
-
                 @Override
                 public void onFailure(Call<POST> call, Throwable t) {
 
                     Toast.makeText(Preguntas.this, "Error en la connexió", Toast.LENGTH_LONG).show();
                 }
-
             });
             return 1;
         }
         else{
-
             return 2;
         }
-
-
     }
-
     }
 
 

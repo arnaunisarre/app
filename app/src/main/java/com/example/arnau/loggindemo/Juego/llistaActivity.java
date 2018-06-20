@@ -28,7 +28,7 @@ public class llistaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_llista);
         Usuario jugador = ((MyUsuario) this.getApplication()).getGlobalUsuario();
 
-        API.getInstance().api.getlistaObjetosUser("liz").enqueue(new Callback<List<Objeto>>() {
+        API.getInstance().api.getlistaObjetosUser("Liz").enqueue(new Callback<List<Objeto>>() {
 
             @Override
             public void onResponse(Call<List<Objeto>> call, Response<List<Objeto>> response) {
@@ -53,18 +53,11 @@ public class llistaActivity extends AppCompatActivity {
                             Objeto u = objectArray.get(position);
                             String a= u.getNombreObjeto();
                             i.putExtra("objeto", a);
-
-
                             startActivity(i);
-
                         }
                     });
-
                 }
             }
-
-
-
             @Override
             public void onFailure(Call<List<Objeto>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "No connection", Toast.LENGTH_LONG).show();
@@ -72,9 +65,5 @@ public class llistaActivity extends AppCompatActivity {
                 pb.setVisibility(View.INVISIBLE);
             }
         });
-
-
-
-
     }
 }
